@@ -1,25 +1,38 @@
 #Date: 08-04-2025
 #Author(s): Robot Group 3
 
-
-
 #Description: This Program simulates operations of HAB taxi services, 
 #the program will allow the user to intereact with the company menu system.
+
 #--------------------
 # Enter New Emploee 
 #--------------------
+
 #--------------------
 # Enter Company Revenue 
 #--------------------
+
+#--------------------
 # Enter Company Expense 
+#--------------------
+
 #--------------------
 # Track Car Rental 
 #--------------------
+
+
+#--------------------
 # Record Employee Pay 
+#--------------------
+
 #--------------------
 # Print Profit Listing
 #--------------------
+
+#--------------------
 # Print Driver Finance 
+#--------------------
+
 #--------------------
 # Exit Program 
 #--------------------
