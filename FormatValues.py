@@ -33,7 +33,7 @@ def format_phone(Phone):
 
 # Enter new Employee function.
 
-def enternewemploy():
+def enternewemployee():
     Employee_ID = input("Enter the employee ID: ")
 
     First_Name = input("Enter the employee first name: ").upper()
@@ -44,10 +44,19 @@ def enternewemploy():
     
     # Employee information.
     Driver_Num = int(input("Enter the driver number: "))
-    # Driver_Ex_Date = 
+    Driver_Ex_Date = date(2028, 12, 20) #Year / month / day of the expiration date.
+    if datetime.today() > Driver_Ex_Date:
+        print("The driver's license is expired.") 
+        exit()
+     
     Ins_Comp = input("What is the name of the insurance company?: ").upper()
     Pol_Num = int(input("Enter the policy number for the driver: "))
     Own_Vehicle = input("Does the driver own his own vehicle? (Y/N): ").upper()
+    Rental_Vehicle_Num = [1, 2, 3, 4]
+    if Own_Vehicle == "Y":
+        print("Driver's vehicle used.")
+    else:
+        Rent_Choice = 
 
 
         
