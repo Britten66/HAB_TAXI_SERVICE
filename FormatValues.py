@@ -31,7 +31,26 @@ def format_phone(Phone):
     end = Phone[6:10]
     return "(" + area + ")" + middle + "-" + end 
 
+# Enter new Employee function.
 
+def enternewemploy():
+    Employee_ID = input("Enter the employee ID: ")
+
+    First_Name = input("Enter the employee first name: ").upper()
+    Last_Name = input("Enter the employee last name: ").upper()
+    Street_Add = input("Enter the employee street address:")
+    Phone = input("Enter the employee phone number[(XXX) XXX-XXXX]: ")
+    formatted_phone = FV.format_phone(Phone)
+    
+    # Employee information.
+    Driver_Num = int(input("Enter the driver number: "))
+    # Driver_Ex_Date = 
+    Ins_Comp = input("What is the name of the insurance company?: ").upper()
+    Pol_Num = int(input("Enter the policy number for the driver: "))
+    Own_Vehicle = input("Does the driver own his own vehicle? (Y/N): ").upper()
+
+
+        
 # How to split up 2 outputs from a funciton
 # def get_name_parts(full_name):
 #      first, last = full_name.split()
@@ -56,8 +75,6 @@ def mileage_valid(mileage_input):
         print("Mileage Must Be Whole Number")
             
    
-
-
 
 def FDollar2(DollarValue):
     # Function will accept a value and format it to $#,###.##.
