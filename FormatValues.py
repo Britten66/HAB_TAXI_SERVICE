@@ -29,8 +29,8 @@ def format_phone(Phone):
     area = Phone[0:3]
     middle = Phone[3:6]
     end = Phone[6:10]
+    
     return "(" + area + ")" + middle + "-" + end 
-
 
 # How to split up 2 outputs from a funciton
 # def get_name_parts(full_name):
@@ -40,8 +40,6 @@ def format_phone(Phone):
 # fname, lname = get_name_parts("")
 # print(fname)  
 # print(lname)  
-
-
 
 #Mileage Function
 
@@ -55,9 +53,6 @@ def mileage_valid(mileage_input):
     except ValueError:
         print("Mileage Must Be Whole Number")
             
-   
-
-
 
 def FDollar2(DollarValue):
     # Function will accept a value and format it to $#,###.##.
