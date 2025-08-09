@@ -51,7 +51,7 @@ while True:
 # Menu Picking Portion Here 
 #--------------------
     if choice == "1":
-        FV.enternewemploy()
+        FV.enternewemployee()
     elif choice == "2":
         #Link Companby revenue function here 
     elif choice == "3":
