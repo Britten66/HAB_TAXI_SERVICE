@@ -29,52 +29,6 @@ while True:
 
 # Bal_Due_Stand = 
 
-#--------------------
-# Main Function Will Be Here
-#--------------------
-    def main():
-        while True:
-            print("   HAB Taxi Services")
-            print("Company Services System")
-            print("1.   Enter a New Employee (driver). ")
-            print("2.   Enter Company Revenues. ") # this is the problem we ran into with qap 4 -- 
-            print("3.   Enter Company Expenses. ")
-            print("4.   Track Car Rentals. ")
-            print("5.   Record Employee Payment. ")
-            print("6.   Print Company Profit Listing. ")
-            print("7.   Print Driver Profit Listing. ")
-            print("8.   Quit Program. ")
-            print()
-    choice = input("        Enter Choice (1-8)")
-
-
-#--------------------
-# Menu Picking Portion Here 
-#--------------------
-
-
-# To do : 
-    if choice == "1":
-        FV.enternewemployee()
-    elif choice == "2":
-        # Link Company revenue function here function tto printt out a table and so on ,,, must write to revenue function 
-
-    elif choice == "3":
-        # Link expense here
-        # Link compnay expense function .. and so on ,,, must write to expense function 
-
-    elif choice == "4":
-
-        # Track company Rentals.
-
-    elif choice == "5":
-        # Record Employee Payment.
-    elif choice == "6":
-        # Print Company Profit Listing.
-    elif choice == "7":
-        # Print Driver Financial Listing.
-    elif choice == "8":
-
     # Enter new Employee function.
 
     def enternewemployee():
@@ -135,6 +89,50 @@ while True:
 #--------------------
 # Print Profit Listing
 #--------------------
+#--------------------
+# Menu Picking Portion Here 
+#--------------------
+    def main():
+        while True:
+            print("   HAB Taxi Services")
+            print("Company Services System")
+            print("1.   Enter a New Employee (driver). ")
+            print("2.   Enter Company Revenues. ") # this is the problem we ran into with qap 4 -- 
+            print("3.   Enter Company Expenses. ")
+            print("4.   Track Car Rentals. ")
+            print("5.   Record Employee Payment. ")
+            print("6.   Print Company Profit Listing. ")
+            print("7.   Print Driver Profit Listing. ")
+            print("8.   Quit Program. ")
+            print()
+    choice = input("        Enter Choice (1-8)")
+
+
+
+
+
+# To do : 
+    if choice == "1":
+        FV.enternewemployee()
+    elif choice == "2":
+        # Link Company revenue function here function tto printt out a table and so on ,,, must write to revenue function 
+
+    elif choice == "3":
+        # Link expense here
+        # Link compnay expense function .. and so on ,,, must write to expense function 
+
+    elif choice == "4":
+
+        # Track company Rentals.
+
+    elif choice == "5":
+        # Record Employee Payment.
+    elif choice == "6":
+        # Print Company Profit Listing.
+    elif choice == "7":
+        # Print Driver Financial Listing.
+    elif choice == "8":
+
 
 #--------------------
 # Print Driver Finance 
