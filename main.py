@@ -17,11 +17,12 @@ CURR_DATE = datetime.datetime.now()
 
 while True:
     with open('Default.dat', 'r') as file:
-        NEXT_TRANS_NUM = file.readlines()
-        NEXT_DRIVER_NUM = file.readlines()
-        MONTHLY_STAND_FEE = file.readlines() #For Drivers with their own vehicle.
-        DAILY_RENT_FEE = file.readlines() #For drivers that rent one of the company cars.
-        WEEKLY_RENT_FEE = file.readlines() # " "
+        NEXT_TRANS_NUM = file.readlines() # 143 is the default driver number.
+        NEXT_DRIVER_NUM = file.readlines() # 1922 is the default driver number.
+        MONTHLY_STAND_FEE = file.readlines() # $175.00 for monthly stand fee for drivers with their own vehicle.
+        DAILY_RENT_FEE = file.readlines() # $60.00 for daily fee.
+        WEEKLY_RENT_FEE = file.readlines() # $300.00 for the weekly rent fee.
+        HST_ESP = file.readlines() # 0.15 for HST rate.
 
 
 # if Own_Vehicle == "Y":
@@ -52,15 +53,15 @@ while True:
 #--------------------
 
 
-#To do : 
+# To do : 
     if choice == "1":
         FV.enternewemployee()
     elif choice == "2":
-        #Link Company revenue function here function tto printt out a table and so on ,,, must write to revenue function 
+        # Link Company revenue function here function tto printt out a table and so on ,,, must write to revenue function 
 
     elif choice == "3":
-            #link expense here
-        #Link compnay expense function .. and so on ,,, must write to expense function 
+        # Link expense here
+        # Link compnay expense function .. and so on ,,, must write to expense function 
 
     elif choice == "4":
 
@@ -97,4 +98,4 @@ while True:
 
 # The Program will use defaults.dat to store constant data. 
 
-# There will be a sample data file created for faker data, 
+# There will be a sample data file created for faker data.
