@@ -41,23 +41,25 @@ while True:
         
         # Employee information.
         Driver_Num = int(input("Enter the driver number: "))
+   
     # Start checking this section here! 
         Driver_Ex_Date = FV.FDateS.format(2028, 12, 20) #Year / month / day of the expiration date.
 
 
         Driver_Ex_Date = FV.date(2028, 12, 20) # Year / month / day of the expiration date.
-        if datetime.today() > Driver_Ex_Date:
+        if datetime.today().date() > Driver_Ex_Date:
             print("The driver's license is expired.") 
             exit()
-    # Check this section for improvement!
+    # End at this section for improvement!
             
         Ins_Comp = input("What is the name of the insurance company?: ").upper()
         Pol_Num = int(input("Enter the policy number for the driver: "))
         Own_Vehicle = input("Does the driver own his own vehicle? (Y/N): ").upper()
-        
-        with open("Employees.dat", "a") as f:
-            f.write(f"{Employee_ID},{First_Name},{Last_Name},{Street_Add},{formatted_phone},{Driver_Num},{Driver_Ex_Date},{Ins_Comp},{Pol_Num},{Own_Vehicle}\n")
-                        
+    
+    
+    with open("Employees.dat", "a") as f:
+        f.write(f"{Employee_ID},{First_Name},{Last_Name},{Street_Add},{formatted_phone},{Driver_Num},{Driver_Ex_Date},{Ins_Comp},{Pol_Num},{Own_Vehicle}\n")
+                    
 #--------------------
 # Track Car Rental 
 #--------------------
@@ -84,6 +86,10 @@ while True:
             else:
                 print("Invalid rental period.")
 
+
+                
+
+
 #--------------------
 # Record Employee Pay 
 #--------------------
@@ -91,7 +97,19 @@ while True:
 #--------------------
 # Print Profit Listing
 #--------------------
+    Emp_ID = enternewemployee() #Used to get the employee ID from the function. 
+   
+#   Calculations to be made.
+    TransactionID = 0 #As we don't know the ID number or alpha numerical code for this, I set it to 0.
+    TransAmt = 0.00 #Enter calculation here!
+    HSTAmt = TransAmt * HST_ESP
+    TotalAmt = TransAmt + HSTAmt
+    # Minus off of the Expenses, such as the repairs, expenses and office ID's to get the total amount.
 
+    
+    with open("Finance.dat", "w") as f:
+          f.write(f"{Emp_ID}{TransactionID},{TransAmt},{HSTAmt},{TotalAmt}\n")
+          
 #--------------------
 # Menu Picking Portion Here 
 #--------------------
@@ -109,7 +127,6 @@ while True:
             print("8.   Quit Program. ")
             print()
     choice = input("        Enter Choice (1-8)")
-
 
 
 
