@@ -40,11 +40,13 @@ def enternewemployee():
     Last_Name = input("Enter the employee last name: ").upper()
     Street_Add = input("Enter the employee street address:")
     Phone = input("Enter the employee phone number[(XXX) XXX-XXXX]: ")
-    formatted_phone = FV.format_phone(Phone)
+    formatted_phone = format_phone.format(Phone)
     
     # Employee information.
     Driver_Num = int(input("Enter the driver number: "))
-    Driver_Ex_Date = date(2028, 12, 20) #Year / month / day of the expiration date.
+    Driver_Ex_Date = FDateS.format(2028, 12, 20) #Year / month / day of the expiration date.
+   
+   
     if datetime.today() > Driver_Ex_Date:
         print("The driver's license is expired.") 
         exit()
@@ -52,12 +54,23 @@ def enternewemployee():
     Ins_Comp = input("What is the name of the insurance company?: ").upper()
     Pol_Num = int(input("Enter the policy number for the driver: "))
     Own_Vehicle = input("Does the driver own his own vehicle? (Y/N): ").upper()
+    
+    # Rental vehicle number for the user to select.
     Rental_Vehicle_Num = [1, 2, 3, 4]
+    Rent_period = ["day", "week"]
+
     if Own_Vehicle == "Y":
         print("Driver's vehicle used.")
-    else:
-        Rent_Choice = 
+        
+    elif Rent_Choice == input("Enter a vehicle rental number(1-4): "):
+         Rent_Choice = int(Rental_Vehicle_Num)
+    elif Rent_period == input("How long does the driver need the rental? (please choose  day / week): ").upper():
+        Rent_period = Rent_period
 
+    else: 
+        print("Invalid number selection, Please choose a number between 1 and 4.")
+
+    
 
         
 # How to split up 2 outputs from a funciton
