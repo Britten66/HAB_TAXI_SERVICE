@@ -22,7 +22,7 @@ while True:
         MONTHLY_STAND_FEE = file.readlines() #For Drivers with their own vehicle.
         DAILY_RENT_FEE = file.readlines() #For drivers that rent one of the company cars.
         WEEKLY_RENT_FEE = file.readlines() # " "
-
+        HST_RATE = file.readlines() #HST rate is 15%
 
 # if Own_Vehicle == "Y":
 
@@ -73,11 +73,59 @@ while True:
     elif choice == "7":
         # Print Driver Financial Listing.
     elif choice == "8":
+
+    # Enter new Employee function.
+
+    def enternewemployee():
+        Employee_ID = input("Enter the employee ID: ")
+
+        First_Name = input("Enter the employee first name: ").upper()
+        Last_Name = input("Enter the employee last name: ").upper()
+        Street_Add = input("Enter the employee street address:")
+        Phone = input("Enter the employee phone number[(XXX) XXX-XXXX]: ")
+        formatted_phone = format_phone.format(Phone)
+        
+        # Employee information.
+        Driver_Num = int(input("Enter the driver number: "))
+    
+        Driver_Ex_Date = FDateS.format(2028, 12, 20) #Year / month / day of the expiration date.
+
+
+        Driver_Ex_Date = date(2028, 12, 20) # Year / month / day of the expiration date.
+        if datetime.today() > Driver_Ex_Date:
+            print("The driver's license is expired.") 
+            exit()
+            
+    Ins_Comp = input("What is the name of the insurance company?: ").upper()
+    Pol_Num = int(input("Enter the policy number for the driver: "))
+    Own_Vehicle = input("Does the driver own his own vehicle? (Y/N): ").upper()
+
                    
 #--------------------
 # Track Car Rental 
 #--------------------
+    # Rental vehicle number for the user to select.
+    Rental_Vehicle_Num = [1, 2, 3, 4]
+    Rent_Period = ["day", "week"]
 
+    if Own_Vehicle == "Y":
+        print("Driver's vehicle used.")
+        
+    else:
+        # Ask the user for rental details.
+        Rent_Choice = int(input("Enter a vehicle rental number (1-4): "))
+        Rent_Period = input("How long does the driver need the rental? (day / week): ").upper()
+        if Rent_Choice in [1, 2, 3, 4]:
+            print(f"Rental vehicle number {Rent_Choice} selected.")
+        else:
+            print("Invalid rental vehicle number.")
+
+        if Rent_Period == "DAY":
+            print('Rental period set to daily.')
+        elif Rent_Period == "WEEK":
+            print("Rental period set to weekly.")
+        else:
+            print("Invalid rental period.")
 
 #--------------------
 # Record Employee Pay 
