@@ -32,8 +32,6 @@ def format_phone(Phone):
     
     return "(" + area + ")" + middle + "-" + end 
 
-<<<<<<< HEAD
-=======
 # Enter new Employee function.
 
 def enternewemployee():
@@ -47,7 +45,7 @@ def enternewemployee():
     
     # Employee information.
     Driver_Num = int(input("Enter the driver number: "))
-    Driver_Ex_Date = date(2028, 12, 20) #Year / month / day of the expiration date.
+    Driver_Ex_Date = date(2028, 12, 20) # Year / month / day of the expiration date.
     if datetime.today() > Driver_Ex_Date:
         print("The driver's license is expired.") 
         exit()
@@ -63,7 +61,6 @@ def enternewemployee():
 
 
         
->>>>>>> 266ac6c74372af96b0e5bb7baed51e35a2a1ab07
 # How to split up 2 outputs from a funciton
 # def get_name_parts(full_name):
 #      first, last = full_name.split()
@@ -85,10 +82,7 @@ def mileage_valid(mileage_input):
     except ValueError:
         print("Mileage Must Be Whole Number")
             
-<<<<<<< HEAD
-=======
    
->>>>>>> 266ac6c74372af96b0e5bb7baed51e35a2a1ab07
 
 def FDollar2(DollarValue):
     # Function will accept a value and format it to $#,###.##.

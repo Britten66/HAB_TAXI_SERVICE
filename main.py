@@ -56,10 +56,19 @@ while True:
     if choice == "1":
         FV.enternewemploy()
     elif choice == "2":
-        #Link Companby revenue function here 
+        #Link Company revenue function here 
     elif choice == "3":
         #Link compnay expense function .. and so on ,,, 
-    
+    elif choice == "4":
+        # Track company Rentals.
+    elif choice == "5":
+        # Record Employee Payment.
+    elif choice == "6":
+        # Print Company Profit Listing.
+    elif choice == "7":
+        # Print Driver Financial Listing.
+    elif choice == "8":
+                   
 #--------------------
 # Track Car Rental 
 #--------------------
