@@ -15,7 +15,7 @@ def Receipt_gen_id(FirstName, LastName, Plate, Phone):
        print("Phone Number Is invalid. Please try again")
       exit()
 
-#Here is current Date 
+# Here is current Date 
 
 CURRENT_DATE = datetime.datetime.now() 
 
@@ -23,7 +23,7 @@ def first_payment_date():
     one_month = datetime.timedelta(days=30)
     return (CURRENT_DATE + one_month).strftime("%b %d, %Y")
 
-#Format Phone Function
+# Format Phone Function.
 
 def format_phone(Phone):
 
