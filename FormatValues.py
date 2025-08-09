@@ -15,7 +15,7 @@ def Receipt_gen_id(FirstName, LastName, Plate, Phone):
        print("Phone Number Is invalid. Please try again")
       exit()
 
-# Here is current Date 
+#Here is current Date 
 
 CURRENT_DATE = datetime.datetime.now() 
 
@@ -23,7 +23,7 @@ def first_payment_date():
     one_month = datetime.timedelta(days=30)
     return (CURRENT_DATE + one_month).strftime("%b %d, %Y")
 
-# Format Phone Function.
+#Format Phone Function
 
 def format_phone(Phone):
 
@@ -33,50 +33,8 @@ def format_phone(Phone):
     
     return "(" + area + ")" + middle + "-" + end 
 
-# Enter new Employee function.
 
-def enternewemployee():
-    Employee_ID = input("Enter the employee ID: ")
 
-    First_Name = input("Enter the employee first name: ").upper()
-    Last_Name = input("Enter the employee last name: ").upper()
-    Street_Add = input("Enter the employee street address:")
-    Phone = input("Enter the employee phone number[(XXX) XXX-XXXX]: ")
-    formatted_phone = format_phone.format(Phone)
-    
-    # Employee information.
-    Driver_Num = int(input("Enter the driver number: "))
-    Driver_Ex_Date = date(2028, 12, 20) # Year / month / day of the expiration date.
-    if datetime.today() > Driver_Ex_Date:
-        print("The driver's license is expired.") 
-        exit()
-     
-    Ins_Comp = input("What is the name of the insurance company?: ").upper()
-    Pol_Num = int(input("Enter the policy number for the driver: "))
-    Own_Vehicle = input("Does the driver own his own vehicle? (Y/N): ").upper()
-    
-    # Rental vehicle number for the user to select.
-    Rental_Vehicle_Num = [1, 2, 3, 4]
-    Rent_Period = ["day", "week"]
-
-    if Own_Vehicle == "Y":
-        print("Driver's vehicle used.")
-        
-    else:
-        # Ask the user for rental details.
-        Rent_Choice = int(input("Enter a vehicle rental number (1-4): "))
-        Rent_Period = input("How long does the driver need the rental? (day / week): ").upper()
-        if Rent_Choice in [1, 2, 3, 4]:
-            print(f"Rental vehicle number {Rent_Choice} selected.")
-        else:
-            print("Invalid rental vehicle number.")
-
-        if Rent_Period == "DAY":
-            print('Rental period set to daily.')
-        elif Rent_Period == "WEEK":
-            print("Rental period set to weekly.")
-        else:
-            print("Invalid rental period.")
     
 
         # Get the first payment date.
