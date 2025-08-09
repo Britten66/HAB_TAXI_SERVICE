@@ -1,6 +1,7 @@
 # Library of functions for formatting numbers and dates.
 
 import datetime
+import timedelta
 
 #Receipt Generator Function
 
@@ -62,20 +63,41 @@ def enternewemployee():
     
     # Rental vehicle number for the user to select.
     Rental_Vehicle_Num = [1, 2, 3, 4]
-    Rent_period = ["day", "week"]
+    Rent_Period = ["day", "week"]
 
     if Own_Vehicle == "Y":
         print("Driver's vehicle used.")
         
-    elif Rent_Choice == input("Enter a vehicle rental number(1-4): "):
-         Rent_Choice = int(Rental_Vehicle_Num)
-    elif Rent_period == input("How long does the driver need the rental? (please choose  day / week): ").upper():
-        Rent_period = Rent_period
+    else:
+        # Ask the user for rental details.
+        Rent_Choice = int(input("Enter a vehicle rental number (1-4): "))
+        Rent_Period = input("How long does the driver need the rental? (day / week): ").upper()
+        if Rent_Choice in [1, 2, 3, 4]:
+            print(f"Rental vehicle number {Rent_Choice} selected.")
+        else:
+            print("Invalid rental vehicle number.")
 
-    else: 
-        print("Invalid number selection, Please choose a number between 1 and 4.")
-
+        if Rent_Period == "DAY":
+            print('Rental period set to daily.')
+        elif Rent_Period == "WEEK":
+            print("Rental period set to weekly.")
+        else:
+            print("Invalid rental period.")
     
+
+        # Get the first payment date.
+    def GetFirstPaymentDate():
+        today = datetime.now().date()
+
+        NextMonth = (today.replace(day=28) + timedelta(days=4)).replace(day=1)
+
+        if today.day >=25:
+            NextMonth = (NextMonth.replace(day=28) + timedelta(days=4)).replace(day=1)
+        else:
+            NextMonth = today.replace(day=1) + timedelta(days=32)
+            NextMonth = NextMonth.replace(day=1)
+            return NextMonth
+  
 
         
 # How to split up 2 outputs from a funciton
