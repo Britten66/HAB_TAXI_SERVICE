@@ -36,7 +36,7 @@ while True:
             print("   HAB Taxi Services")
             print("Company Services System")
             print("1.   Enter a New Employee (driver). ")
-            print("2.   Enter Company Revenues. ")
+            print("2.   Enter Company Revenues. ") # this is the problem we ran into with qap 4 -- 
             print("3.   Enter Company Expenses. ")
             print("4.   Track Car Rentals. ")
             print("5.   Record Employee Payment. ")
@@ -50,13 +50,25 @@ while True:
 #--------------------
 # Menu Picking Portion Here 
 #--------------------
+
+
+
     if choice == "1":
         FV.enternewemployee()
     elif choice == "2":
-        #Link Companby revenue function here 
+        #Link Company revenue function here 
     elif choice == "3":
         #Link compnay expense function .. and so on ,,, 
-    
+    elif choice == "4":
+        # Track company Rentals.
+    elif choice == "5":
+        # Record Employee Payment.
+    elif choice == "6":
+        # Print Company Profit Listing.
+    elif choice == "7":
+        # Print Driver Financial Listing.
+    elif choice == "8":
+                   
 #--------------------
 # Track Car Rental 
 #--------------------

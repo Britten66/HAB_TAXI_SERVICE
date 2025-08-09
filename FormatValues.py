@@ -29,6 +29,7 @@ def format_phone(Phone):
     area = Phone[0:3]
     middle = Phone[3:6]
     end = Phone[6:10]
+    
     return "(" + area + ")" + middle + "-" + end 
 
 # Enter new Employee function.
@@ -44,9 +45,13 @@ def enternewemployee():
     
     # Employee information.
     Driver_Num = int(input("Enter the driver number: "))
+<<<<<<< HEAD
     Driver_Ex_Date = FDateS.format(2028, 12, 20) #Year / month / day of the expiration date.
    
    
+=======
+    Driver_Ex_Date = date(2028, 12, 20) # Year / month / day of the expiration date.
+>>>>>>> 5ae89af62e66b74b50b308c9c397a73ce80489b7
     if datetime.today() > Driver_Ex_Date:
         print("The driver's license is expired.") 
         exit()
@@ -81,8 +86,6 @@ def enternewemployee():
 # fname, lname = get_name_parts("")
 # print(fname)  
 # print(lname)  
-
-
 
 #Mileage Function
 
