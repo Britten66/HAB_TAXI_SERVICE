@@ -25,9 +25,9 @@ while True:
         HST_ESP = float(file.readlines())# 0.15 for HST rate.
 
 
-# if Own_Vehicle == "Y":
 
-# Bal_Due_Stand = 
+
+
 
     # Enter new Employee function.
 
@@ -37,7 +37,7 @@ while True:
         Last_Name = input("Enter the employee last name: ").upper()
         Street_Add = input("Enter the employee street address:")
         Phone = input("Enter the employee phone number[(XXX) XXX-XXXX]: ")
-        formatted_phone = FV.format_phone.format(Phone)
+        formatted_phone = FV.format_phone(Phone)
         
         # Employee information.
         Driver_Num = int(input("Enter the driver number: "))
