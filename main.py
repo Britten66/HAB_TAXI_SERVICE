@@ -32,7 +32,7 @@ while True:
     # Enter new Employee function.
 
     def enternewemployee():
-        Employee_ID = input("Enter the employee ID: ")
+        Employee_ID = NEXT_DRIVER_NUM
         First_Name = input("Enter the employee first name: ").upper()
         Last_Name = input("Enter the employee last name: ").upper()
         Street_Add = input("Enter the employee street address:")
@@ -40,9 +40,9 @@ while True:
         formatted_phone = FV.format_phone(Phone)
         
         # Employee information.
-        Driver_Num = int(input("Enter the driver number: "))
+        Driver_Lic_Num = input("Enter the driver's license number: ")
    
-    # Start checking this section here! 
+        # Start checking this section here! 
         Driver_Ex_Date = FV.FDateS.format(2028, 12, 20) #Year / month / day of the expiration date.
 
 
@@ -50,7 +50,7 @@ while True:
         if datetime.today().date() > Driver_Ex_Date:
             print("The driver's license is expired.") 
             exit()
-    # End at this section for improvement!
+        # End at this section for improvement!
             
         Ins_Comp = input("What is the name of the insurance company?: ").upper()
         Pol_Num = int(input("Enter the policy number for the driver: "))
@@ -58,8 +58,18 @@ while True:
     
     
         with open("Employees.dat", "a") as f:
-            f.write(f"{Employee_ID}, {First_Name}, {Last_Name}, {Street_Add}, {formatted_phone}, {Driver_Num}, {Driver_Ex_Date}, {Ins_Comp}, {Pol_Num}, {Own_Vehicle}\n")
-                    
+            f.write(f"{Employee_ID}, {First_Name}, {Last_Name}, {Street_Add}, {formatted_phone}, {Driver_Lic_Num}, {Driver_Ex_Date}, {Ins_Comp}, {Pol_Num}, {Own_Vehicle}\n")
+
+        NEXT_DRIVER_NUM += 1
+        with open("Defaults.dat", "w") as f:
+            
+            f.write(f"{NEXT_TRANS_NUM}\n") 
+            f.write(f"{NEXT_DRIVER_NUM}\n") 
+            f.write(f"{MONTHLY_STAND_FEE }\n") 
+            f.write(f"{DAILY_RENT_FEE }\n") 
+            f.write(f"{WEEKLY_RENT_FEE }\n") 
+            f.write(f"{HST_ESP}\n")
+                            
 #--------------------
 # Track Car Rental 
 #--------------------
