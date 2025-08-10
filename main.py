@@ -88,7 +88,7 @@ while True:
         while True:
             # Input and validation for rentail start date.
             try:
-                RenStartDate = input("Enter the start date of the rental: ")
+                RenStartDate = input("Enter the start date of the rental (YYYY-MM-DD): ")
                 RenStartDate = FV.FDateS(RenStartDate)
                 if  RenStartDate == "":
                     print()
@@ -179,7 +179,7 @@ while True:
 
         NEXT_TRANS_NUM += 1
 
-        f = open("Defaults.dat", "w")
+        f = open("Default.dat", "w")
 
         f.write(f"{NEXT_TRANS_NUM}\n") 
         f.write(f"{NEXT_DRIVER_NUM}\n") 
