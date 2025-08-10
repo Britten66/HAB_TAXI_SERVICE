@@ -25,24 +25,24 @@ while True:
         HST_ESP = float(file.readlines())# 0.15 for HST rate.
 
 
-# if Own_Vehicle == "Y":
 
-# Bal_Due_Stand = 
+
+
 
     # Enter new Employee function.
 
     def enternewemployee():
-        Employee_ID = input("Enter the employee ID: ")
+        Employee_ID = NEXT_DRIVER_NUM
         First_Name = input("Enter the employee first name: ").upper()
         Last_Name = input("Enter the employee last name: ").upper()
         Street_Add = input("Enter the employee street address:")
         Phone = input("Enter the employee phone number[(XXX) XXX-XXXX]: ")
-        formatted_phone = FV.format_phone.format(Phone)
+        formatted_phone = FV.format_phone(Phone)
         
         # Employee information.
-        Driver_Num = int(input("Enter the driver number: "))
+        Driver_Lic_Num = input("Enter the driver's license number: ")
    
-    # Start checking this section here! 
+        # Start checking this section here! 
         Driver_Ex_Date = FV.FDateS.format(2028, 12, 20) #Year / month / day of the expiration date.
 
 
@@ -50,7 +50,7 @@ while True:
         if datetime.today().date() > Driver_Ex_Date:
             print("The driver's license is expired.") 
             exit()
-    # End at this section for improvement!
+        # End at this section for improvement!
             
         Ins_Comp = input("What is the name of the insurance company?: ").upper()
         Pol_Num = int(input("Enter the policy number for the driver: "))
@@ -58,8 +58,18 @@ while True:
     
     
         with open("Employees.dat", "a") as f:
-            f.write(f"{Employee_ID}, {First_Name}, {Last_Name}, {Street_Add}, {formatted_phone}, {Driver_Num}, {Driver_Ex_Date}, {Ins_Comp}, {Pol_Num}, {Own_Vehicle}\n")
-                    
+            f.write(f"{Employee_ID}, {First_Name}, {Last_Name}, {Street_Add}, {formatted_phone}, {Driver_Lic_Num}, {Driver_Ex_Date}, {Ins_Comp}, {Pol_Num}, {Own_Vehicle}\n")
+
+        NEXT_DRIVER_NUM += 1
+        with open("Defaults.dat", "w") as f:
+            
+            f.write(f"{NEXT_TRANS_NUM}\n") 
+            f.write(f"{NEXT_DRIVER_NUM}\n") 
+            f.write(f"{MONTHLY_STAND_FEE }\n") 
+            f.write(f"{DAILY_RENT_FEE }\n") 
+            f.write(f"{WEEKLY_RENT_FEE }\n") 
+            f.write(f"{HST_ESP}\n")
+                            
 #--------------------
 # Track Car Rental 
 #--------------------
@@ -335,22 +345,25 @@ while True:
         enternewemployee()
     elif choice == "2":
         # Link Company revenue function here function tto printt out a table and so on ,,, must write to revenue function 
-        
+        print(f"Choice 2")
     elif choice == "3":
         # Link expense here
         # Link compnay expense function .. and so on ,,, must write to expense function 
-
+        print(f"Choice 3")
     elif choice == "4":
         # Track company Rentals.
         Rentals()
     elif choice == "5":
         # Record Employee Payment.
+        print(f"Choice 5")
     elif choice == "6":
         # Print Company Profit Listing.
+        print(f"Profit Listing")
     elif choice == "7":
         # Print Driver Financial Listing.
+        print(f"Diver Finacial Listing")
     elif choice == "8":
-
+        quit()
 
 #--------------------
 # Print Driver Finance 
