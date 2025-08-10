@@ -26,14 +26,14 @@ with open('Default.dat', 'r') as f:
 
 
 
-
+os.system("cls" if os.name == "nt" else "clear") # Clears the screen when program is lanched.
 
     # Enter new Employee function.
 while True: 
 
-    os.system("cls" if os.name == "nt" else "clear") # Clears the screen when program is lanched.
+
  
- 
+
     def enternewemployee():
         Employee_ID = NEXT_DRIVER_NUM
         First_Name = input("Enter the employee first name: ").upper()
@@ -72,7 +72,31 @@ while True:
             f.write(f"{DAILY_RENT_FEE }\n") 
             f.write(f"{WEEKLY_RENT_FEE }\n") 
             f.write(f"{HST_ESP}\n")
-                            
+
+
+
+#--------------------
+# Revenue Here
+#--------------------
+    def revenue_output():
+
+     with open('Revenue.dat', 'r') as f:
+        REV_OUTPUT = str(f.readlines()) # will print revenue file list
+     
+        print(f"{REV_OUTPUT}")
+
+#--------------------
+# Expenses Here
+#--------------------
+    def expenses_output():
+ 
+     with open('Expenses.dat', 'r') as f:
+        EXP_OUTPUT = str(f.readlines()) # will print expense file list
+
+        print(f"{EXP_OUTPUT}")
+
+
+
 #--------------------
 # Track Car Rental 
 #--------------------
@@ -102,7 +126,6 @@ while True:
             # Input and validation for rentail start date.
             try:
                 RenStartDate = input("Enter the start date of the rental (YYYY-MM-DD): ")
-                RenStartDate = FV.FDateS(RenStartDate)
                 if  RenStartDate == "":
                     print()
                     print("     Data Entry Error - Rental ID can not be blank.")
@@ -111,29 +134,29 @@ while True:
                 print()
                 print(" Data Entry Error - The rental date is invalid.")
                 print()
-                continue
+                
             else:
                 break
 
-        CarRentedLst = [1, 2, 3, 4]
+
         while True:
             # Input and validation for the car number rented.
             CarRented = input("Enter the car to be rented (1, 2, 3 or 4): ")
             CarRented = int(CarRented)
-            if CarRented == "":
+            if CarRented > 4:
                 print()
-                print("     Data Entry Error - Car rented can not be blank.")
+                print("  Data Entry Error - Must Be a Valid Number Between 1-4. ")
                 print()
-            elif CarRented not in CarRentedLst:
+            elif CarRented <= 0:
                 print()
-                print("     Data Entry Error - Car rented is invalid.")
+                print("  Data Entry Error - Must Be a Valid Number Between 1-4.")
                 print()
             else:
                 break
 
         while True:
             # Input and validation for the amount of days(s) the car will be rented.
-            NumDaysRen = input("Enter the number of days you wnat to rent a car (Day or Week): ").title()
+            NumDaysRen = input("Rental Choice - (Day/Week): ").title()
             if NumDaysRen == "":
                 print()
                 print("     Data Entry Error - Number of days rented can not be blank.")
@@ -142,7 +165,11 @@ while True:
                 print()
                 print("     Data Entry Error - Number of day(s) rented must be either 'Day' (1 day) or 'Week' (7 days).")
                 print()
-            elif NumDaysRen == "Day":
+            else:
+                break
+
+                # Validation for num days rented via day/week 
+            if NumDaysRen == "Day":
                 NumDaysRen = 1
             elif NumDaysRen == "Week":
                 NumDaysRen = 7
@@ -150,15 +177,19 @@ while True:
                 break
 
         # Statement and calculation for the rental cost.
-        if CarRented in CarRentedLst == True and NumDaysRen == 1:
+
+        RentalCost = 0
+
+        if NumDaysRen == 1:
             RentalCost = DAILY_RENT_FEE * NumDaysRen
-        elif CarRented in CarRentedLst == True and NumDaysRen == 7:
+        elif NumDaysRen == 7:
             RentalCost = WEEKLY_RENT_FEE * NumDaysRen
+
 
         # Calculation for the rental Hst.
         RentalHst = RentalCost * HST_ESP
 
-        # Calculation for the rental total.
+            # Calculation for the rental total.
         TotRenCost = RentalCost + RentalHst
 
         # Display results.
@@ -180,7 +211,7 @@ while True:
 
         f = open("Revenue.dat", "a")
 
-        f.write(f"{str(NEXT_TRANS_NUM)}, ")
+        f.write(f"{NEXT_TRANS_NUM}, ")
         f.write(f"{str(FV.FDateS(CURR_DATE))}, ")
         f.write(f"Car Rental Cost", )
         f.write(f"{str(DriverNum)}", )
@@ -324,9 +355,9 @@ while True:
 
             print("   HAB Taxi Services")
             print("Company Services System")
-            print("1.   Enter a New Employee (driver). ")
-            print("2.   Enter Company Revenues. ") # this is the problem we ran into with qap 4 -- 
-            print("3.   Enter Company Expenses. ")
+            print("1.   Enter a New Employee (driver). ") # done ! 
+            print("2.   Enter Company Revenues. ") # this is the problem we ran into with qap 4 --  # Done ! 
+            print("3.   Enter Company Expenses. ") # Done ! 
             print("4.   Track Car Rentals. ")
             print("5.   Record Employee Payment. ")
             print("6.   Print Company Profit Listing. ")
@@ -344,10 +375,11 @@ while True:
         enternewemployee()
     elif choice == "2":
         # Link Company revenue function here function tto printt out a table and so on ,,, must write to revenue function 
+        revenue_output()
         print(f"Choice 2")
     elif choice == "3":
-        # Link expense here
         # Link compnay expense function .. and so on ,,, must write to expense function 
+        expenses_output()
         print(f"Choice 3")
     elif choice == "4":
         # Track company Rentals.
@@ -362,6 +394,7 @@ while True:
         # Print Driver Financial Listing.
         print(f"Diver Finacial Listing")
     elif choice == "8":
+        print("Good Bye ... ")
         quit()
 
 #--------------------
