@@ -236,18 +236,17 @@ while True:
 
 # To do : 
     if choice == "1":
-        FV.enternewemployee()
+        enternewemployee()
     elif choice == "2":
         # Link Company revenue function here function tto printt out a table and so on ,,, must write to revenue function 
-
+        
     elif choice == "3":
         # Link expense here
         # Link compnay expense function .. and so on ,,, must write to expense function 
 
     elif choice == "4":
-
         # Track company Rentals.
-
+        Rentals()
     elif choice == "5":
         # Record Employee Payment.
     elif choice == "6":
