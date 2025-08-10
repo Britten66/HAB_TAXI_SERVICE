@@ -30,6 +30,10 @@ with open('Default.dat', 'r') as f:
 
     # Enter new Employee function.
 while True: 
+
+    os.system("cls" if os.name == "nt" else "clear") # Clears the screen when program is lanched.
+ 
+ 
     def enternewemployee():
         Employee_ID = NEXT_DRIVER_NUM
         First_Name = input("Enter the employee first name: ").upper()
