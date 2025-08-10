@@ -264,22 +264,25 @@ while True:
         enternewemployee()
     elif choice == "2":
         # Link Company revenue function here function tto printt out a table and so on ,,, must write to revenue function 
-        
+        print(f"Choice 2")
     elif choice == "3":
         # Link expense here
         # Link compnay expense function .. and so on ,,, must write to expense function 
-
+        print(f"Choice 3")
     elif choice == "4":
         # Track company Rentals.
         Rentals()
     elif choice == "5":
         # Record Employee Payment.
+        print(f"Choice 5")
     elif choice == "6":
         # Print Company Profit Listing.
+        print(f"Profit Listing")
     elif choice == "7":
         # Print Driver Financial Listing.
+        print(f"Diver Finacial Listing")
     elif choice == "8":
-
+        quit()
 
 #--------------------
 # Print Driver Finance 
