@@ -98,7 +98,7 @@ while True:
         while True:
             # Input and validation for rentail start date.
             try:
-                RenStartDate = input("Enter the start date of the rental: ")
+                RenStartDate = input("Enter the start date of the rental (YYYY-MM-DD): ")
                 RenStartDate = FV.FDateS(RenStartDate)
                 if  RenStartDate == "":
                     print()
