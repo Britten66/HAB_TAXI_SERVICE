@@ -32,7 +32,7 @@ while True:
     # Enter new Employee function.
 
     def enternewemployee():
-        Employee_ID = input("Enter the employee ID: ")
+        Employee_ID = NEXT_DRIVER_NUM
         First_Name = input("Enter the employee first name: ").upper()
         Last_Name = input("Enter the employee last name: ").upper()
         Street_Add = input("Enter the employee street address:")
@@ -40,9 +40,9 @@ while True:
         formatted_phone = FV.format_phone(Phone)
         
         # Employee information.
-        Driver_Num = int(input("Enter the driver number: "))
+        Driver_Lic_Num = input("Enter the driver's license number: ")
    
-    # Start checking this section here! 
+        # Start checking this section here! 
         Driver_Ex_Date = FV.FDateS.format(2028, 12, 20) #Year / month / day of the expiration date.
 
 
@@ -50,7 +50,7 @@ while True:
         if datetime.today().date() > Driver_Ex_Date:
             print("The driver's license is expired.") 
             exit()
-    # End at this section for improvement!
+        # End at this section for improvement!
             
         Ins_Comp = input("What is the name of the insurance company?: ").upper()
         Pol_Num = int(input("Enter the policy number for the driver: "))
@@ -58,8 +58,18 @@ while True:
     
     
         with open("Employees.dat", "a") as f:
-            f.write(f"{Employee_ID}, {First_Name}, {Last_Name}, {Street_Add}, {formatted_phone}, {Driver_Num}, {Driver_Ex_Date}, {Ins_Comp}, {Pol_Num}, {Own_Vehicle}\n")
-                    
+            f.write(f"{Employee_ID}, {First_Name}, {Last_Name}, {Street_Add}, {formatted_phone}, {Driver_Lic_Num}, {Driver_Ex_Date}, {Ins_Comp}, {Pol_Num}, {Own_Vehicle}\n")
+
+        NEXT_DRIVER_NUM += 1
+        with open("Defaults.dat", "w") as f:
+            
+            f.write(f"{NEXT_TRANS_NUM}\n") 
+            f.write(f"{NEXT_DRIVER_NUM}\n") 
+            f.write(f"{MONTHLY_STAND_FEE }\n") 
+            f.write(f"{DAILY_RENT_FEE }\n") 
+            f.write(f"{WEEKLY_RENT_FEE }\n") 
+            f.write(f"{HST_ESP}\n")
+                            
 #--------------------
 # Track Car Rental 
 #--------------------
@@ -221,6 +231,77 @@ while True:
 #--------------------
 # Record Employee Pay 
 #--------------------
+
+    def record_payment():
+    #Recoriding a payment.. this will write to its own file
+
+     while True:
+        payment_num = input("Enter Your Payment ID: ").strip()
+        if payment_num != "":
+            break
+        else: ValueError
+        print("Date Entry Error - Cannot Be Blank")
+ # these ifs are set up different but result should be same
+    while True:
+        # Input and validation for driver number.
+        DriverNum = input("Enter the driver number: ").strip()
+        if DriverNum == "":
+            print()
+            print("     Data Entry Error - Rental ID can not be blank.")
+            print()
+        else:
+            break
+
+    while True:
+        reason = input("Enter Reason For Payment ").strip()
+        if reason == "":
+            print()
+            print("         Data Entry Error")      
+
+#--------------------
+# Date used is today
+#--------------------
+ 
+        pay_date = datetime.now() 
+    
+#--------------------
+# Amount Here 
+#--------------------
+
+        while True:
+         Pay_amt = input("Enter The Amount Going To Be Paid: ").strip()
+         try:
+            amount = float(Pay_amt)
+            if amount > 0:
+                break
+            print("Data Error -- Amount Must be numeric ") # non positive num
+
+         except ValueError:
+          print("Data Enbtrey Eror") # this means not a number 
+
+#--------------------
+# Method Of Pay Here 
+#--------------------
+       
+        ValidMethod = {"CASH","DEBIT","VISA"}   # These are allowed inputs 
+        while True: 
+            method = input("Enter The Method Of PAyment (Cash/Debit/Visa)").strip().upper()
+            if method in ValidMethod:
+                break
+            print("Data ENtry Ertror - Method must be Cash, Debit or Visa")
+            
+        methoddsp = method.title()
+
+#--------------------
+# Writing to the payments .dat file here 
+#--------------------
+
+        with open("Payments.dat", "a") as f:
+         f.write(f"{payment_num}, {DriverNum}, {pay_date}, {amount:.2f}, {reason}. {methoddsp}\n")
+
+
+
+
 
 #--------------------
 # Print Profit Listing
