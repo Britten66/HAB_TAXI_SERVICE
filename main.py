@@ -17,12 +17,12 @@ CURR_DATE = datetime.datetime.now()
 
 while True:
     with open('Default.dat', 'r') as file:
-        NEXT_TRANS_NUM = file.readlines() # 143 is the default driver number.
-        NEXT_DRIVER_NUM = file.readlines() # 1922 is the default driver number.
-        MONTHLY_STAND_FEE = file.readlines() # $175.00 for monthly stand fee for drivers with their own vehicle.
-        DAILY_RENT_FEE = file.readlines() # $60.00 for daily fee.
-        WEEKLY_RENT_FEE = file.readlines() # $300.00 for the weekly rent fee.
-        HST_ESP = file.readlines() # 0.15 for HST rate.
+        NEXT_TRANS_NUM = int(file.readlines()) # 143 is the default driver number.
+        NEXT_DRIVER_NUM = int(file.readlines()) # 1922 is the default driver number.
+        MONTHLY_STAND_FEE = float(file.readlines()) # $175.00 for monthly stand fee for drivers with their own vehicle.
+        DAILY_RENT_FEE = float(file.readlines()) # $60.00 for daily fee.
+        WEEKLY_RENT_FEE = float(file.readlines()) # $300.00 for the weekly rent fee.
+        HST_ESP = float(file.readlines())# 0.15 for HST rate.
 
 
 # if Own_Vehicle == "Y":
@@ -57,12 +57,116 @@ while True:
         Own_Vehicle = input("Does the driver own his own vehicle? (Y/N): ").upper()
     
     
-    with open("Employees.dat", "a") as f:
-        f.write(f"{Employee_ID},{First_Name},{Last_Name},{Street_Add},{formatted_phone},{Driver_Num},{Driver_Ex_Date},{Ins_Comp},{Pol_Num},{Own_Vehicle}\n")
+        with open("Employees.dat", "a") as f:
+            f.write(f"{Employee_ID}, {First_Name}, {Last_Name}, {Street_Add}, {formatted_phone}, {Driver_Num}, {Driver_Ex_Date}, {Ins_Comp}, {Pol_Num}, {Own_Vehicle}\n")
                     
 #--------------------
 # Track Car Rental 
 #--------------------
+
+    def Rentals():
+
+        while True:
+            # Input and validation for rentail ID.
+            RentalID = input("Enter the rental ID: ")
+            if RentalID == "":
+                print()
+                print("     Data Entry Error - Rental ID can not be blank.")
+                print()
+            else:
+                break
+
+        while True:
+            # Input and validation for driver number.
+            DriverNum = input("Enter the driver number: ")
+            if DriverNum == "":
+                print()
+                print("     Data Entry Error - Rental ID can not be blank.")
+                print()
+            else:
+                break
+
+        while True:
+            # Input and validation for rentail start date.
+            try:
+                RenStartDate = input("Enter the start date of the rental: ")
+                RenStartDate = FV.FDateS(RenStartDate)
+                if  RenStartDate == "":
+                    print()
+                    print("     Data Entry Error - Rental ID can not be blank.")
+                    print()
+            except ValueError:
+                print()
+                print(" Data Entry Error - The rental date is invalid.")
+                print()
+                continue
+            else:
+                break
+
+        CarRentedLst = [1, 2, 3, 4]
+        while True:
+            # Input and validation for the car number rented.
+            CarRented = input("Enter the car to be rented (1, 2, 3 or 4): ")
+            CarRented = int(CarRented)
+            if CarRented == "":
+                print()
+                print("     Data Entry Error - Car rented can not be blank.")
+                print()
+            elif CarRented not in CarRentedLst:
+                print()
+                print("     Data Entry Error - Car rented is invalid.")
+                print()
+            else:
+                break
+
+        while True:
+            # Input and validation for the amount of days(s) the car will be rented.
+            NumDaysRen = input("Enter the number of days you wnat to rent a car (Day or Week): ").title()
+            if NumDaysRen == "":
+                print()
+                print("     Data Entry Error - Number of days rented can not be blank.")
+                print()
+            elif NumDaysRen.isalpha == False:
+                print()
+                print("     Data Entry Error - Number of day(s) rented must be either 'Day' (1 day) or 'Week' (7 days).")
+                print()
+            elif NumDaysRen == "Day":
+                NumDaysRen = 1
+            elif NumDaysRen == "Week":
+                NumDaysRen = 7
+            else:
+                break
+
+        # Statement and calculation for the rental cost.
+        if CarRented in CarRentedLst == True and NumDaysRen == 1:
+            RentalCost = DAILY_RENT_FEE * NumDaysRen
+        elif CarRented in CarRentedLst == True and NumDaysRen == 7:
+            RentalCost = WEEKLY_RENT_FEE * NumDaysRen
+
+        # Calculation for the rental Hst.
+        RentalHst = RentalCost * HST_ESP
+
+        # Calculation for the rental total.
+        TotRenCost = RentalCost + RentalHst
+
+        # Display results.
+        print()
+        print()
+
+        f = open("Rental.dat", "a") 
+    
+        f.write(f"{str(RentalID)}, ")
+        f.write(f"{str(DriverNum)}, ")
+        f.write(f"{str(RenStartDate)}, ")
+        f.write(f"{str(NumDaysRen)}, ")
+        f.write(f"{str(CarRented)}, ")
+        f.write(f"{str(RentalCost)}, ")
+        f.write(f"{str(RentalHst)}, ")
+        f.write(f"{str(TotRenCost)}\n ")
+
+        f.close
+
+        '''
         # Rental vehicle number for the user to select.
         Rental_Vehicle_Num = [1, 2, 3, 4]
         Rent_Period = ["day", "week"]
@@ -85,7 +189,7 @@ while True:
                 print("Rental period set to weekly.")
             else:
                 print("Invalid rental period.")
-
+            '''
 
                 
 
@@ -97,7 +201,7 @@ while True:
 #--------------------
 # Print Profit Listing
 #--------------------
-    Emp_ID = enternewemployee() #Used to get the employee ID from the function. 
+    Emp_ID = enternewemployee() # Used to get the employee ID from the function. 
    
 #   Calculations to be made.
     TransactionID = 0 #As we don't know the ID number or alpha numerical code for this, I set it to 0.
@@ -108,7 +212,7 @@ while True:
 
     
     with open("Finance.dat", "w") as f:
-          f.write(f"{Emp_ID}{TransactionID},{TransAmt},{HSTAmt},{TotalAmt}\n")
+          f.write(f"{Emp_ID}, {TransactionID}, {TransAmt}, {HSTAmt}, {TotalAmt}\n")
           
 #--------------------
 # Menu Picking Portion Here 
