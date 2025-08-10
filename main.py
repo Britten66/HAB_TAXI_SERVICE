@@ -10,27 +10,26 @@
 import time
 import datetime
 import FormatValues as FV
+import os 
 
 # Define program constents.
 CURR_DATE = datetime.datetime.now()
 
 
-while True:
-    with open('Default.dat', 'r') as file:
-        NEXT_TRANS_NUM = int(file.readlines()) # 143 is the default driver number.
-        NEXT_DRIVER_NUM = int(file.readlines()) # 1922 is the default driver number.
-        MONTHLY_STAND_FEE = float(file.readlines()) # $175.00 for monthly stand fee for drivers with their own vehicle.
-        DAILY_RENT_FEE = float(file.readlines()) # $60.00 for daily fee.
-        WEEKLY_RENT_FEE = float(file.readlines()) # $300.00 for the weekly rent fee.
-        HST_ESP = float(file.readlines())# 0.15 for HST rate.
-
+with open('Default.dat', 'r') as f:
+        NEXT_TRANS_NUM = int(f.readline()) # 143 is the default driver number.
+        NEXT_DRIVER_NUM = int(f.readline()) # 1922 is the default driver number.
+        MONTHLY_STAND_FEE = float(f.readline()) # $175.00 for monthly stand fee for drivers with their own vehicle.
+        DAILY_RENT_FEE = float(f.readline()) # $60.00 for daily fee.
+        WEEKLY_RENT_FEE = float(f.readline()) # $300.00 for the weekly rent fee.
+        HST_ESP = float(f.readline())# 0.15 for HST rate.
 
 
 
 
 
     # Enter new Employee function.
-
+while True: 
     def enternewemployee():
         Employee_ID = NEXT_DRIVER_NUM
         First_Name = input("Enter the employee first name: ").upper()
@@ -305,24 +304,20 @@ while True:
 #--------------------
 # Print Profit Listing
 #--------------------
-    Emp_ID = enternewemployee() # Used to get the employee ID from the function. 
-   
-#   Calculations to be made.
-    TransactionID = 0 #As we don't know the ID number or alpha numerical code for this, I set it to 0.
-    TransAmt = 0.00 #Enter calculation here!
-    HSTAmt = TransAmt * HST_ESP
-    TotalAmt = TransAmt + HSTAmt
-    # Minus off of the Expenses, such as the repairs, expenses and office ID's to get the total amount.
 
-    
-    with open("Finance.dat", "w") as f:
-          f.write(f"{Emp_ID}, {TransactionID}, {TransAmt}, {HSTAmt}, {TotalAmt}\n")
-          
+
+
+
+
+
+
 #--------------------
 # Menu Picking Portion Here 
 #--------------------
     def main():
+
         while True:
+
             print("   HAB Taxi Services")
             print("Company Services System")
             print("1.   Enter a New Employee (driver). ")
@@ -334,9 +329,10 @@ while True:
             print("7.   Print Driver Profit Listing. ")
             print("8.   Quit Program. ")
             print()
+
+
+
     choice = input("        Enter Choice (1-8)")
-
-
 
 
 # To do : 

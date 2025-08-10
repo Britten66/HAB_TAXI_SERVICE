@@ -1,7 +1,7 @@
 # Library of functions for formatting numbers and dates.
 
 import datetime
-import timedelta
+
 
 #Receipt Generator Function
 
