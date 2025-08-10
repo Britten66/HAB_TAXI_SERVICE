@@ -37,18 +37,19 @@ def format_phone(Phone):
 
     
 
-        # Get the first payment date.
-    def GetFirstPaymentDate():
-        today = datetime.now().date()
+# Get the first payment date.
 
-        NextMonth = (today.replace(day=28) + timedelta(days=4)).replace(day=1)
+'''def GetFirstPaymentDate():
+    today = datetime.now().date()
 
-        if today.day >=25:
-            NextMonth = (NextMonth.replace(day=28) + timedelta(days=4)).replace(day=1)
-        else:
-            NextMonth = today.replace(day=1) + timedelta(days=32)
-            NextMonth = NextMonth.replace(day=1)
-            return NextMonth
+    NextMonth = (today.replace(day=28) + timedelta(days=4)).replace(day=1)
+
+    if today.day >=25:
+        NextMonth = (NextMonth.replace(day=28) + timedelta(days=4)).replace(day=1)
+    else:
+        NextMonth = today.replace(day=1) + timedelta(days=32)
+        NextMonth = NextMonth.replace(day=1)
+        return NextMonth'''
   
 
         
