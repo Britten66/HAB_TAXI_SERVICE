@@ -232,10 +232,10 @@ while True:
 # Record Employee Pay 
 #--------------------
 
-    def record_payment()
+    def record_payment():
     #Recoriding a payment.. this will write to its own file
 
-    while True:
+     while True:
         payment_num = input("Enter Your Payment ID: ").strip()
         if payment_num != "":
             break
