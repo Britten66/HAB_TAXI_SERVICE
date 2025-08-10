@@ -242,7 +242,7 @@ while True:
         else: ValueError
         print("Date Entry Error - Cannot Be Blank")
  # these ifs are set up different but result should be same
-    while True:
+     while True:
         # Input and validation for driver number.
         DriverNum = input("Enter the driver number: ").strip()
         if DriverNum == "":
@@ -252,21 +252,21 @@ while True:
         else:
             break
 
-    while True:
+     while True:
         reason = input("Enter Reason For Payment ").strip()
         if reason == "":
             print()
             print("         Data Entry Error")      
 
-#--------------------
+
 # Date used is today
-#--------------------
+
  
         pay_date = datetime.now() 
     
-#--------------------
+
 # Amount Here 
-#--------------------
+
 
         while True:
          Pay_amt = input("Enter The Amount Going To Be Paid: ").strip()
@@ -279,9 +279,9 @@ while True:
          except ValueError:
           print("Data Enbtrey Eror") # this means not a number 
 
-#--------------------
+
 # Method Of Pay Here 
-#--------------------
+
        
         ValidMethod = {"CASH","DEBIT","VISA"}   # These are allowed inputs 
         while True: 
@@ -292,13 +292,12 @@ while True:
             
         methoddsp = method.title()
 
-#--------------------
+
 # Writing to the payments .dat file here 
-#--------------------
 
         with open("Payments.dat", "a") as f:
          f.write(f"{payment_num}, {DriverNum}, {pay_date}, {amount:.2f}, {reason}. {methoddsp}\n")
-
+ 
 
 
 
