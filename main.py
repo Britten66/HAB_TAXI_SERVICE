@@ -165,6 +165,31 @@ while True:
 
         f.close
 
+        f = open("Revenue.dat", "a")
+
+        f.write(f"{str(NEXT_TRANS_NUM)}, ")
+        f.write(f"{str(FV.FDateS(CURR_DATE))}, ")
+        f.write(f"Car Rental Cost", )
+        f.write(f"{str(DriverNum)}", )
+        f.write(f"{str(RentalCost)}", )
+        f.write(f"{str(RentalHst)}", )
+        f.write(f"{str(TotRenCost)}\n")
+
+        f.close()
+
+        NEXT_TRANS_NUM += 1
+
+        f = open("Defaults.dat", "w")
+
+        f.write(f"{NEXT_TRANS_NUM}\n") 
+        f.write(f"{NEXT_DRIVER_NUM}\n") 
+        f.write(f"{MONTHLY_STAND_FEE }\n") 
+        f.write(f"{DAILY_RENT_FEE }\n") 
+        f.write(f"{WEEKLY_RENT_FEE }\n") 
+        f.write(f"{HST_ESP}\n")
+
+        f.close()
+
         '''
         # Rental vehicle number for the user to select.
         Rental_Vehicle_Num = [1, 2, 3, 4]
