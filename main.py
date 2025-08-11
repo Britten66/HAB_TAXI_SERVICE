@@ -17,12 +17,12 @@ CURR_DATE = datetime.datetime.now()
 
 
 with open('Default.dat', 'r') as f:
-        NEXT_TRANS_NUM = int(f.readline()) # 143 is the default driver number.
-        NEXT_DRIVER_NUM = int(f.readline()) # 1922 is the default driver number.
-        MONTHLY_STAND_FEE = float(f.readline()) # $175.00 for monthly stand fee for drivers with their own vehicle.
-        DAILY_RENT_FEE = float(f.readline()) # $60.00 for daily fee.
-        WEEKLY_RENT_FEE = float(f.readline()) # $300.00 for the weekly rent fee.
-        HST_ESP = float(f.readline())# 0.15 for HST rate.
+    NEXT_TRANS_NUM = int(f.readline()) # 143 is the default driver number.
+    NEXT_DRIVER_NUM = int(f.readline()) # 1922 is the default driver number.
+    MONTHLY_STAND_FEE = float(f.readline()) # $175.00 for monthly stand fee for drivers with their own vehicle.
+    DAILY_RENT_FEE = float(f.readline()) # $60.00 for daily fee.
+    WEEKLY_RENT_FEE = float(f.readline()) # $300.00 for the weekly rent fee.
+    HST_ESP = float(f.readline())# 0.15 for HST rate.
 
 
 
@@ -30,9 +30,6 @@ os.system("cls" if os.name == "nt" else "clear") # Clears the screen when progra
 
     # Enter new Employee function.
 while True: 
-
-
- 
 
     def enternewemployee():
         Employee_ID = NEXT_DRIVER_NUM
@@ -102,8 +99,20 @@ while True:
 #--------------------
     def Rentals():
 
+        f = open('Default.dat', 'r')
+
+        NEXT_TRANS_NUM = int(f.readline()) # 143 is the default driver number.
+        NEXT_DRIVER_NUM = int(f.readline()) # 1922 is the default driver number.
+        MONTHLY_STAND_FEE = float(f.readline()) # $175.00 for monthly stand fee for drivers with their own vehicle.
+        DAILY_RENT_FEE = float(f.readline()) # $60.00 for daily fee.
+        WEEKLY_RENT_FEE = float(f.readline()) # $300.00 for the weekly rent fee.
+        HST_ESP = float(f.readline())# 0.15 for HST rate.
+
+        f.close()
+
         while True:
             # Input and validation for rentail ID.
+            print()
             RentalID = input("Enter the rental ID: ")
             if RentalID == "":
                 print()
@@ -114,6 +123,7 @@ while True:
 
         while True:
             # Input and validation for driver number.
+            print()
             DriverNum = input("Enter the driver number: ")
             if DriverNum == "":
                 print()
@@ -124,11 +134,13 @@ while True:
 
         while True:
             # Input and validation for rentail start date.
+            print()
             try:
                 RenStartDate = input("Enter the start date of the rental (YYYY-MM-DD): ")
+                RenStartDate = datetime.datetime.strptime(RenStartDate, "%Y-%m-%d")
                 if  RenStartDate == "":
                     print()
-                    print("     Data Entry Error - Rental ID can not be blank.")
+                    print("     Data Entry Error - Rental date can not be blank.")
                     print()
             except ValueError:
                 print()
@@ -141,6 +153,7 @@ while True:
 
         while True:
             # Input and validation for the car number rented.
+            print()
             CarRented = input("Enter the car to be rented (1, 2, 3 or 4): ")
             CarRented = int(CarRented)
             if CarRented > 4:
@@ -156,6 +169,7 @@ while True:
 
         while True:
             # Input and validation for the amount of days(s) the car will be rented.
+            print()
             NumDaysRen = input("Rental Choice - (Day/Week): ").title()
             if NumDaysRen == "":
                 print()
@@ -169,38 +183,67 @@ while True:
                 break
 
                 # Validation for num days rented via day/week 
-            if NumDaysRen == "Day":
-                NumDaysRen = 1
-            elif NumDaysRen == "Week":
-                NumDaysRen = 7
-            else:
-                break
+        if NumDaysRen == "Day":
+            NumDaysRen = 1
+        elif NumDaysRen == "Week":
+            NumDaysRen = 7
 
         # Statement and calculation for the rental cost.
-
-        RentalCost = 0
-
+        NumDaysRen = int(NumDaysRen)
         if NumDaysRen == 1:
-            RentalCost = DAILY_RENT_FEE * NumDaysRen
+            RentalCost = DAILY_RENT_FEE
         elif NumDaysRen == 7:
-            RentalCost = WEEKLY_RENT_FEE * NumDaysRen
+            RentalCost = WEEKLY_RENT_FEE
 
+        RentalCostDsp = FV.FDollar2(RentalCost)
 
         # Calculation for the rental Hst.
         RentalHst = RentalCost * HST_ESP
+        RentalHstDsp = FV.FDollar2(RentalHst)
 
-            # Calculation for the rental total.
+        # Calculation for the rental total.
         TotRenCost = RentalCost + RentalHst
+        TotRenCostDsp = FV.FDollar2(TotRenCost)
+
+        CURR_DATEDsp = FV.FDateM(CURR_DATE)
+
+        RenStartDateDsp = FV.FDateM(RenStartDate)
 
         # Display results.
         print()
         print()
+        print(f"----------------------------------------")
+        print(f"             Rental Receipt             ")
+        print(f"----------------------------------------")
+        print(f" Rental ID:                      {RentalID:>6s} ")
+        print()
+        print(f" Diver Number:                  {DriverNum:>6s}")
+        print()
+        print(f" Car Rented:                     {CarRented:>2d}")
+        print()
+        print(f" Start Date of rental:        {RenStartDateDsp}")
+        print(f"----------------------------------------")
+        print(f" Number of days rented:          {NumDaysRen:>2d}")
+        print(f"                               ---------")
+        print(f" Rental Cost:                   {RentalCostDsp:>6s}")
+        print()
+        print(f" Hst:                            {RentalHstDsp:>6s}")
+        print(f"                               ---------")
+        print(f" Total Rental Cost:             {TotRenCostDsp:>6s}")
+        print(f"-----------------------------------------")
+        print(f" Rental requested on:          {CURR_DATEDsp}")
+        print(f"-----------------------------------------")
+        print(f"     Thank you from Habs Taxi Service    ")
+        print(f"-----------------------------------------")
+        print()
+        print()
+
 
         f = open("Rental.dat", "a") 
-    
+
         f.write(f"{str(RentalID)}, ")
         f.write(f"{str(DriverNum)}, ")
-        f.write(f"{str(RenStartDate)}, ")
+        f.write(f"{FV.FDateS(RenStartDate)}, ")
         f.write(f"{str(NumDaysRen)}, ")
         f.write(f"{str(CarRented)}, ")
         f.write(f"{str(RentalCost)}, ")
@@ -213,10 +256,9 @@ while True:
 
         f.write(f"{NEXT_TRANS_NUM}, ")
         f.write(f"{str(FV.FDateS(CURR_DATE))}, ")
-        f.write(f"Car Rental Cost", )
-        f.write(f"{str(DriverNum)}", )
-        f.write(f"{str(RentalCost)}", )
-        f.write(f"{str(RentalHst)}", )
+        f.write(f"Car Rental Cost, ")
+        f.write(f"{str(RentalCost)}, ")
+        f.write(f"{str(RentalHst)}, ")
         f.write(f"{str(TotRenCost)}\n")
 
         f.close()
@@ -349,25 +391,24 @@ while True:
 #--------------------
 # Menu Picking Portion Here 
 #--------------------
-    def main():
+   # def main():
 
-        while True:
+        #while True:
 
-            print("   HAB Taxi Services")
-            print("Company Services System")
-            print("1.   Enter a New Employee (driver). ") # done ! 
-            print("2.   Enter Company Revenues. ") # this is the problem we ran into with qap 4 --  # Done ! 
-            print("3.   Enter Company Expenses. ") # Done ! 
-            print("4.   Track Car Rentals. ")
-            print("5.   Record Employee Payment. ")
-            print("6.   Print Company Profit Listing. ")
-            print("7.   Print Driver Profit Listing. ")
-            print("8.   Quit Program. ")
-            print()
+    print("        Habs Taxi Services         ")
+    print("      Company Services System      ")
+    print()
+    print("1.   Enter a New Employee (driver). ") # done ! 
+    print("2.   Enter Company Revenues. ") # this is the problem we ran into with qap 4 --  # Done ! 
+    print("3.   Enter Company Expenses. ") # Done ! 
+    print("4.   Track Car Rentals. ")
+    print("5.   Record Employee Payment. ")
+    print("6.   Print Company Profit Listing. ")
+    print("7.   Print Driver Profit Listing. ")
+    print("8.   Quit Program. ")
+    print()
 
-
-
-    choice = input("        Enter Choice (1-8)")
+    choice = input("     Enter Choice (1-8): ")
 
 
 # To do : 
