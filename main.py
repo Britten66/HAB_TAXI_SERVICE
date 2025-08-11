@@ -311,80 +311,102 @@ while True:
 
     def record_payment():
     #Recoriding a payment.. this will write to its own file
-
      while True:
         payment_num = input("Enter Your Payment ID: ").strip()
         if payment_num != "":
-            break
-        else: ValueError
-        print("Date Entry Error - Cannot Be Blank")
- # these ifs are set up different but result should be same
-     while True:
-        # Input and validation for driver number.
-        DriverNum = input("Enter the driver number: ").strip()
-        if DriverNum == "":
-            print()
-            print("     Data Entry Error - Rental ID can not be blank.")
-            print()
+             break
         else:
-            break
-
+             print("Date Entry Error - Cannot Be Blank")
+                # these ifs are set up different but result should be same
+     while True: # Input and validation for driver number.
+        DriverNum = input("Enter the driver number: ").strip()
+        if DriverNum != "":
+             break
+        print("Data Entry Error - Rental ID can not be blank.")
+            # Reasoning
      while True:
         reason = input("Enter Reason For Payment ").strip()
-        if reason == "":
-            print()
-            print("         Data Entry Error")      
-
-
+        if reason != "":
+            break
+        print("Reason Cannot Be Blank! ")      
 # Date used is today
+            
+     pay_date = FV.FDateS(datetime.datetime.now())        # Amount Here 
 
- 
-        pay_date = datetime.now() 
-    
-
-# Amount Here 
-
-
-        while True:
-         Pay_amt = input("Enter The Amount Going To Be Paid: ").strip()
-         try:
+     while True:
+        Pay_amt = input("Enter The Amount Going To Be Paid: ").strip()
+        try:
             amount = float(Pay_amt)
             if amount > 0:
                 break
-            print("Data Error -- Amount Must be numeric ") # non positive num
+            else:
+                print("Data Error -- Amount Must be numeric ") # non positive num
+        except ValueError:
+         print("Value Error - Must Be Numeric") # this means not a number 
+            # Method Of Pay Here 
+     ValidMethod = {"CASH","DEBIT","VISA"}   # These are allowed inputs           
+     while True: 
+        method = input("Enter The Method Of PAyment (Cash/Debit/Visa)").strip().upper()
+        if method in ValidMethod:
+            break
+        print("Data ENtry Ertror - Method must be Cash, Debit or Visa")
+     methoddsp = method.title()
+     Pay_amtDsp = FV.FDollar2(amount)
+            # Writing to the payments .dat file here 
 
-         except ValueError:
-          print("Data Enbtrey Eror") # this means not a number 
-
-
-# Method Of Pay Here 
-
-       
-        ValidMethod = {"CASH","DEBIT","VISA"}   # These are allowed inputs 
-        while True: 
-            method = input("Enter The Method Of Payment (Cash/Debit/Visa)").strip().upper()
-            if method in ValidMethod:
-                break
-            print("Data Entry Ertror - Method must be Cash, Debit or Visa")
+     with open("Payments.dat", "a") as f:
+      f.write(f"{payment_num}, {DriverNum}, {pay_date}, {Pay_amtDsp}, {reason}. {methoddsp}\n")
             
-        methoddsp = method.title()
-
-
-# Writing to the payments .dat file here 
-
-        with open("Payments.dat", "a") as f:
-         f.write(f"{payment_num}, {DriverNum}, {pay_date}, {amount:.2f}, {reason}. {methoddsp}\n")
  
+        # =================
+        # Display results.
+        # =================
+     print()
+     print()
+     print(f"----------------------------------------")
+     print(f"             Employee Payment           ")
+     print(f"----------------------------------------")
+     print(f"Payment ID:                    {payment_num}")
+     print()
+     print(f"Diver Number:                  {NEXT_DRIVER_NUM}")
+     print()
+     print(f"Reason For Payment:            {reason}")
+     print()
+     print(f"Pay Date:                      {pay_date}")
+     print(f"----------------------------------------")
+     print(f"Pay Type:                      {methoddsp}")
+     print(f"                               ---------")
+     print(f"Pay Amount:                    {Pay_amtDsp}")
+     print(f"                               ---------")
+   
+     print(f"-----------------------------------------")
+     print(f"     Thank you from Habs Taxi Service    ")
+     print(f"-----------------------------------------")
+     print()
+     print()
 
-
-
-
-#---------------------
+#--------------------
 # Print Profit Listing
 #---------------------
 
 
 
+
+
+
+#--------------------
+# Print Driver Finance 
+#--------------------
+
+    def print_finance():
+ 
+        emp_num = input("Enter Employee Number: ")
+        start_date = input("Enter The Start Date")
+        end_date = input("Enter The End Date: ")
+     
+    with open("Revenue.dat", "r") as f:
+      f.readlines # this will be printing a report when the number gets pressed 
+ 
 
 
 
@@ -399,7 +421,7 @@ while True:
     print("        Habs Taxi Services         ")
     print("      Company Services System      ")
     print()
-    print("1.   Enter a New Employee (driver). ") # done ! 
+    print("1.   Enter a New Employee (driver).") # done ! 
     print("2.   Enter Company Revenues. ") # this is the problem we ran into with qap 4 --  # Done ! 
     print("3.   Enter Company Expenses. ") # Done ! 
     print("4.   Track Car Rentals. ")
@@ -418,17 +440,15 @@ while True:
     elif choice == "2":
         # Link Company revenue function here function tto printt out a table and so on ,,, must write to revenue function 
         revenue_output()
-        print(f"Choice 2")
     elif choice == "3":
         # Link compnay expense function .. and so on ,,, must write to expense function 
         expenses_output()
-        print(f"Choice 3")
     elif choice == "4":
         # Track company Rentals.
         Rentals()
     elif choice == "5":
         # Record Employee Payment.
-        print(f"Choice 5")
+        record_payment()
     elif choice == "6":
         # Print Company Profit Listing.
         print(f"Profit Listing")
@@ -439,9 +459,26 @@ while True:
         print("Good Bye ... ")
         quit()
 
-#--------------------
-# Print Driver Finance 
-#--------------------
+    print()
+    print()
+    print("Data Saving.", end="", flush=True)
+    time.sleep(0.6)
+    print(".", end="", flush=True)
+    time.sleep(0.6)
+    print(".", end="", flush=True)
+    time.sleep(0.5)
+    print(".", end="", flush=True)
+    time.sleep(0.5)
+    print("Saved!", flush=True)
+    time.sleep(0.6)
+    print("Data Saved !")
+    print()
+    print()
+
+
+
+
+
 
 #--------------------
 # Exit Program 
