@@ -351,29 +351,37 @@ while True:
      methoddsp = method.title()
             # Writing to the payments .dat file here 
 
-<<<<<<< HEAD
      with open("Payments.dat", "a") as f:
       f.write(f"{payment_num}, {DriverNum}, {pay_date}, {amount:.2f}, {reason}. {methoddsp}\n")
-=======
-       
-        ValidMethod = {"CASH","DEBIT","VISA"}   # These are allowed inputs 
-        while True: 
-            method = input("Enter The Method Of Payment (Cash/Debit/Visa)").strip().upper()
-            if method in ValidMethod:
-                break
-            print("Data Entry Ertror - Method must be Cash, Debit or Visa")
->>>>>>> 5305ef1cd33aea7f431ab525e5c15f31136f2ae4
             
  
 
+        # Display results.
+     print()
+     print()
+     print(f"----------------------------------------")
+     print(f"             Employee Payment           ")
+     print(f"----------------------------------------")
+     print(f"Payment ID:                    {payment_num} ")
+     print()
+     print(f"Diver Number:                  {NEXT_DRIVER_NUM}")
+     print()
+     print(f"Reason For Payment:            {reason}")
+     print()
+     print(f"Pay Date:                      {pay_date}")
+     print(f"----------------------------------------")
+     print(f"Pay Type:                      {methoddsp}")
+     print(f"                               ---------")
+     print(f"Pay Amount:                    {Pay_amt}")
+     print(f"                               ---------")
+   
+     print(f"-----------------------------------------")
+     print(f"     Thank you from Habs Taxi Service    ")
+     print(f"-----------------------------------------")
+     print()
+     print()
 
-
-<<<<<<< HEAD
 #--------------------
-=======
-
-#---------------------
->>>>>>> 5305ef1cd33aea7f431ab525e5c15f31136f2ae4
 # Print Profit Listing
 #---------------------
 
