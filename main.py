@@ -399,37 +399,59 @@ while True:
 #--------------------
 
     def print_finance():
- 
+                #prompts for input regarding the driver number start and end date 
         emp_num = input("Enter Employee Number: ")
+                #These Inputs Will BE Used For Validaitons
         start_date = input("Enter The Start Date")
         end_date = input("Enter The End Date: ")
-        
+                #Opens revenue.dat in read mode
         with open("Revenue.dat", "r") as f:
-            data = f.readlines() # this will be printing a report when the number gets pressed 
+            data = f.readlines() # this will read the entire file as list
             
+
+
         print()
         print("HAB Taxi Driver Finance Listing")
         print(f"Driuer Number: {emp_num}")
         print(f"From {start_date} to {end_date}")
         print("--------------------------------")
 
+        #this starts the holding amount of the program to be 0, no value
         total_amount = 0.0
+        # this variable is set up to catch any unwanted entries
         found_any = False
 
+        #loop starts here
+        #this will loop through each revenue entry in the dat file
         for line in data:
+            #These are testing out clean up methods
             parts = line.strip().split(",") 
+
+            # if there is less tha n4 sections it wont be a valid entry
             if len(parts) < 4:
                 continue
-        
-            file_emp_num = parts[0]
+            
+            #Setting up points for line targeting
+            file_emp_num = parts[0] 
             file_date = parts[1]
             desc = parts[2]
             amount = float(parts[3])
 
+            #This is for checking lines that match the entered data
+            #Also Including the date Start and ENd
             if file_emp_num == emp_num and start_date <= file_date <= end_date:
+                #This prints out the line from the section
                 print(f"{file_date} {desc} ${amount:>,.2f}")
+
+
+                #This increments the total amount
                 total_amount += amount
+
+                #Marking the section that will be flagged here
                 found_any = True
+
+        #this is statment was for a check on matching record, these validations have been staying at the end
+        #if no flags it will print
         if found_any:
             print("--------------------------------")
             print(f"Total:      ${total_amount:,.2f}")
