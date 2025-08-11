@@ -330,7 +330,8 @@ while True:
         print("Reason Cannot Be Blank! ")      
 # Date used is today
             
-     pay_date = FV.FDateS(datetime.date.today())        # Amount Here 
+     pay_date = FV.FDateS(datetime.datetime.now())        # Amount Here 
+
      while True:
         Pay_amt = input("Enter The Amount Going To Be Paid: ").strip()
         try:
@@ -349,20 +350,22 @@ while True:
             break
         print("Data ENtry Ertror - Method must be Cash, Debit or Visa")
      methoddsp = method.title()
+     Pay_amtDsp = FV.FDollar2(amount)
             # Writing to the payments .dat file here 
 
      with open("Payments.dat", "a") as f:
-      f.write(f"{payment_num}, {DriverNum}, {pay_date}, {amount:.2f}, {reason}. {methoddsp}\n")
+      f.write(f"{payment_num}, {DriverNum}, {pay_date}, {Pay_amtDsp}, {reason}. {methoddsp}\n")
             
  
-
+        # =================
         # Display results.
+        # =================
      print()
      print()
      print(f"----------------------------------------")
      print(f"             Employee Payment           ")
      print(f"----------------------------------------")
-     print(f"Payment ID:                    {payment_num} ")
+     print(f"Payment ID:                    {payment_num}")
      print()
      print(f"Diver Number:                  {NEXT_DRIVER_NUM}")
      print()
@@ -372,7 +375,7 @@ while True:
      print(f"----------------------------------------")
      print(f"Pay Type:                      {methoddsp}")
      print(f"                               ---------")
-     print(f"Pay Amount:                    {Pay_amt}")
+     print(f"Pay Amount:                    {Pay_amtDsp}")
      print(f"                               ---------")
    
      print(f"-----------------------------------------")
@@ -401,7 +404,7 @@ while True:
     print("        Habs Taxi Services         ")
     print("      Company Services System      ")
     print()
-    print("1.   Enter a New Employee (driver). ") # done ! 
+    print("1.   Enter a New Employee (driver).") # done ! 
     print("2.   Enter Company Revenues. ") # this is the problem we ran into with qap 4 --  # Done ! 
     print("3.   Enter Company Expenses. ") # Done ! 
     print("4.   Track Car Rentals. ")
@@ -426,11 +429,9 @@ while True:
     elif choice == "4":
         # Track company Rentals.
         Rentals()
-        
     elif choice == "5":
         # Record Employee Payment.
         record_payment()
-        
     elif choice == "6":
         # Print Company Profit Listing.
         print(f"Profit Listing")
@@ -441,10 +442,9 @@ while True:
         print("Good Bye ... ")
         quit()
 
-
     print()
     print()
-    print("Auto Saving.", end="", flush=True)
+    print("Data Saving.", end="", flush=True)
     time.sleep(0.6)
     print(".", end="", flush=True)
     time.sleep(0.6)
@@ -454,8 +454,9 @@ while True:
     time.sleep(0.5)
     print("Saved!", flush=True)
     time.sleep(0.6)
-    print("Data Saved ! ")
-
+    print("Data Saved !")
+    print()
+    print()
 
 
 #--------------------
