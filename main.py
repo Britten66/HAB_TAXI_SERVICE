@@ -403,12 +403,38 @@ while True:
         emp_num = input("Enter Employee Number: ")
         start_date = input("Enter The Start Date")
         end_date = input("Enter The End Date: ")
-     
-    with open("Revenue.dat", "r") as f:
-      f.readlines # this will be printing a report when the number gets pressed 
- 
+        
+        with open("Revenue.dat", "r") as f:
+            data = f.readlines() # this will be printing a report when the number gets pressed 
+            
+        print()
+        print("HAB Taxi Driver Finance Listing")
+        print(f"Driuer Number: {emp_num}")
+        print(f"From {start_date} to {end_date}")
+        print("--------------------------------")
 
+        total_amount = 0.0
+        found_any = False
 
+        for line in data:
+            parts = line.strip().split(",") 
+            if len(parts) < 4:
+                continue
+        
+            file_emp_num = parts[0]
+            file_date = parts[1]
+            desc = parts[2]
+            amount = float(parts[3])
+
+            if file_emp_num == emp_num and start_date <= file_date <= end_date:
+                print(f"{file_date} {desc} ${amount:>,.2f}")
+                total_amount += amount
+                found_any = True
+        if found_any:
+            print("--------------------------------")
+            print(f"Total:      ${total_amount:,.2f}")
+        else:
+            print("Erorr Enter Valid Date Range.")
 
 
 #--------------------------
@@ -453,8 +479,7 @@ while True:
         # Print Company Profit Listing.
         print(f"Profit Listing")
     elif choice == "7":
-        # Print Driver Financial Listing.
-        print(f"Diver Finacial Listing")
+        print_finance()
     elif choice == "8":
         print("Good Bye ... ")
         quit()
