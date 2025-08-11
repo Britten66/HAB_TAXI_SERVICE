@@ -404,8 +404,8 @@ while True:
         start_date = input("Enter The Start Date")
         end_date = input("Enter The End Date: ")
      
-    with open("Revemue.dat", "r") as f:
-      f.readlines
+    with open("Revenue.dat", "r") as f:
+      f.readlines # this will be printing a report when the number gets pressed 
  
 
 
