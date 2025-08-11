@@ -361,10 +361,10 @@ while True:
        
         ValidMethod = {"CASH","DEBIT","VISA"}   # These are allowed inputs 
         while True: 
-            method = input("Enter The Method Of PAyment (Cash/Debit/Visa)").strip().upper()
+            method = input("Enter The Method Of Payment (Cash/Debit/Visa)").strip().upper()
             if method in ValidMethod:
                 break
-            print("Data ENtry Ertror - Method must be Cash, Debit or Visa")
+            print("Data Entry Ertror - Method must be Cash, Debit or Visa")
             
         methoddsp = method.title()
 
@@ -378,9 +378,9 @@ while True:
 
 
 
-#--------------------
+#---------------------
 # Print Profit Listing
-#--------------------
+#---------------------
 
 
 
@@ -388,9 +388,9 @@ while True:
 
 
 
-#--------------------
+#--------------------------
 # Menu Picking Portion Here 
-#--------------------
+#--------------------------
    # def main():
 
         #while True:
@@ -403,7 +403,7 @@ while True:
     print("3.   Enter Company Expenses. ") # Done ! 
     print("4.   Track Car Rentals. ")
     print("5.   Record Employee Payment. ")
-    print("6.   Print Company Profit Listing. ")
+    print("6.   Print Company Profit Listing. ") 
     print("7.   Print Driver Profit Listing. ")
     print("8.   Quit Program. ")
     print()
