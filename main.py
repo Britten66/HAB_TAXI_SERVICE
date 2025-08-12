@@ -402,7 +402,7 @@ while True:
                 #prompts for input regarding the driver number start and end date 
         emp_num = input("Enter Employee Number: ")
                 #These Inputs Will BE Used For Validaitons
-        start_date = input("Enter The Start Date")
+        start_date = input("Enter The Start Date: ")
         end_date = input("Enter The End Date: ")
                 #Opens revenue.dat in read mode
         with open("Revenue.dat", "r") as f:
