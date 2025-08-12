@@ -25,13 +25,13 @@ with open('Default.dat', 'r') as f:
     HST_ESP = float(f.readline())# 0.15 for HST rate.
 
 
-
 os.system("cls" if os.name == "nt" else "clear") # Clears the screen when program is lanched.
 
     # Enter new Employee function.
-while True: 
 
-    def enternewemployee():
+
+def enternewemployee():
+        global NEXT_DRIVER_NUM
         Employee_ID = NEXT_DRIVER_NUM
         First_Name = input("Enter the employee first name: ").upper()
         Last_Name = input("Enter the employee last name: ").upper()
@@ -40,14 +40,16 @@ while True:
         formatted_phone = FV.format_phone(Phone)
         
         # Driver's license number entry.
+        
         Driver_Lic_Num = input("Enter the driver's license number: ")
-   
-        # This formula format's the driver's expiry date.
-        Driver_Ex_Date = FV.FDateS.format(2028, 12, 20) #Year / month / day of the expiration date.
+        Driver_Ex_Date = input("Enter the driver's expiry date (YYYY-MM-DD): ")
+        
+        # Balance due.
+        BalDue = 0
 
         # Statement to determine if the license is valid or not.
-        Driver_Ex_Date = FV.date(2028, 12, 20) # Year / month / day of the expiration date.
-        if datetime.today().date() > Driver_Ex_Date:
+        Driver_Ex_Date = datetime.datetime.strptime(Driver_Ex_Date, "%Y-%m-%d") # Year / month / day of the expiration date.
+        if datetime.datetime.now() > Driver_Ex_Date:
             print("The driver's license is expired.") 
             exit()
         
@@ -59,10 +61,11 @@ while True:
     
         # Append the information to the employees data file for storage.
         with open("Employees.dat", "a") as f:
-            f.write(f"{Employee_ID}, {First_Name}, {Last_Name}, {Street_Add}, {formatted_phone}, {Driver_Lic_Num}, {Driver_Ex_Date}, {Ins_Comp}, {Pol_Num}, {Own_Vehicle}\n")
+            f.write(f"{Employee_ID}, {First_Name}, {Last_Name}, {Street_Add}, {formatted_phone}, {Driver_Lic_Num}, {Driver_Ex_Date}, {Ins_Comp}, {Pol_Num}, {Own_Vehicle}, {BalDue}\n")
 
         # Adds one number to the driver number each time a new employee is entered.
         NEXT_DRIVER_NUM += 1
+        
         with open("Default.dat", "w") as f:
             
             f.write(f"{NEXT_TRANS_NUM}\n") 
@@ -77,7 +80,7 @@ while True:
 #--------------------
 # Revenue Here
 #--------------------
-    def revenue_output():
+def revenue_output():
 
      with open('Revenue.dat', 'r') as f:
         REV_OUTPUT = str(f.readlines()) # will print revenue file list
@@ -87,7 +90,7 @@ while True:
 #--------------------
 # Expenses Here
 #--------------------
-    def expenses_output():
+def expenses_output():
  
      with open('Expenses.dat', 'r') as f:
         EXP_OUTPUT = str(f.readlines()) # will print expense file list
@@ -99,7 +102,7 @@ while True:
 #--------------------
 # Track Car Rental 
 #--------------------
-    def Rentals():
+def Rentals():
 
         f = open('Default.dat', 'r')
 
@@ -313,7 +316,7 @@ while True:
 # Record Employee Pay 
 #--------------------
 
-    def record_payment():
+def record_payment():
     #Recoriding a payment.. this will write to its own file
      while True:
         payment_num = input("Enter Your Payment ID: ").strip()
@@ -372,7 +375,7 @@ while True:
      print(f"----------------------------------------")
      print(f"Payment ID:                    {payment_num}")
      print()
-     print(f"Diver Number:                  {NEXT_DRIVER_NUM}")
+     print(f"Driver Number:                  {NEXT_DRIVER_NUM}")
      print()
      print(f"Reason For Payment:            {reason}")
      print()
@@ -402,7 +405,7 @@ while True:
 # Print Driver Finance 
 #--------------------
 
-    def print_finance():
+def print_finance():
                 #prompts for input regarding the driver number start and end date 
         emp_num = input("Enter Employee Number: ")
                 #These Inputs Will BE Used For Validaitons
@@ -417,7 +420,7 @@ while True:
         print()
         print("HAB Taxi Driver Finance Listing")
         print("--------------------------------")
-        print(f"Employee Name: {}")
+        # print(f"Employee Name: {}")
         print("--------------------------------")
         print(f"Driuer Number: {emp_num}")
         print(f"From {start_date} to {end_date}")
@@ -489,7 +492,7 @@ while True:
 #--------------------------
    # def main():
 
-        #while True:
+while True:
 
     print("        Habs Taxi Services         ")
     print("      Company Services System      ")
@@ -507,7 +510,7 @@ while True:
     choice = input("     Enter Choice (1-8): ")
 
 
-# To do : 
+    # To do : 
     if choice == "1":
         enternewemployee()
     elif choice == "2":
