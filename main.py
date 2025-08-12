@@ -10,26 +10,30 @@
 import time
 import datetime
 import FormatValues as FV
+import os 
 
 # Define program constents.
 CURR_DATE = datetime.datetime.now()
 
 
-while True:
-    with open('Default.dat', 'r') as file:
-        NEXT_TRANS_NUM = int(file.readlines()) # 143 is the default driver number.
-        NEXT_DRIVER_NUM = int(file.readlines()) # 1922 is the default driver number.
-        MONTHLY_STAND_FEE = float(file.readlines()) # $175.00 for monthly stand fee for drivers with their own vehicle.
-        DAILY_RENT_FEE = float(file.readlines()) # $60.00 for daily fee.
-        WEEKLY_RENT_FEE = float(file.readlines()) # $300.00 for the weekly rent fee.
-        HST_ESP = float(file.readlines())# 0.15 for HST rate.
+with open('Default.dat', 'r') as f:
+    NEXT_TRANS_NUM = int(f.readline()) # 143 is the default driver number.
+    NEXT_DRIVER_NUM = int(f.readline()) # 1922 is the default driver number.
+    MONTHLY_STAND_FEE = float(f.readline()) # $175.00 for monthly stand fee for drivers with their own vehicle.
+    DAILY_RENT_FEE = float(f.readline()) # $60.00 for daily fee.
+    WEEKLY_RENT_FEE = float(f.readline()) # $300.00 for the weekly rent fee.
+    HST_ESP = float(f.readline())# 0.15 for HST rate.
 
 
 
+os.system("cls" if os.name == "nt" else "clear") # Clears the screen when program is lanched.
 
-
-
+<<<<<<< HEAD
     # Enter new Employee function. The user must add in all the required information.
+=======
+    # Enter new Employee function.
+while True: 
+>>>>>>> 9d9c3742a0733c6265f0a4e4f055088a252bab94
 
     def enternewemployee():
         Employee_ID = NEXT_DRIVER_NUM
@@ -73,14 +77,50 @@ while True:
             f.write(f"{DAILY_RENT_FEE }\n") 
             f.write(f"{WEEKLY_RENT_FEE }\n") 
             f.write(f"{HST_ESP}\n")
-                            
+
+
+
+#--------------------
+# Revenue Here
+#--------------------
+    def revenue_output():
+
+     with open('Revenue.dat', 'r') as f:
+        REV_OUTPUT = str(f.readlines()) # will print revenue file list
+     
+        print(f"{REV_OUTPUT}")
+
+#--------------------
+# Expenses Here
+#--------------------
+    def expenses_output():
+ 
+     with open('Expenses.dat', 'r') as f:
+        EXP_OUTPUT = str(f.readlines()) # will print expense file list
+
+        print(f"{EXP_OUTPUT}")
+
+
+
 #--------------------
 # Track Car Rental 
 #--------------------
     def Rentals():
 
+        f = open('Default.dat', 'r')
+
+        NEXT_TRANS_NUM = int(f.readline()) # 143 is the default driver number.
+        NEXT_DRIVER_NUM = int(f.readline()) # 1922 is the default driver number.
+        MONTHLY_STAND_FEE = float(f.readline()) # $175.00 for monthly stand fee for drivers with their own vehicle.
+        DAILY_RENT_FEE = float(f.readline()) # $60.00 for daily fee.
+        WEEKLY_RENT_FEE = float(f.readline()) # $300.00 for the weekly rent fee.
+        HST_ESP = float(f.readline())# 0.15 for HST rate.
+
+        f.close()
+
         while True:
             # Input and validation for rentail ID.
+            print()
             RentalID = input("Enter the rental ID: ")
             if RentalID == "":
                 print()
@@ -91,6 +131,7 @@ while True:
 
         while True:
             # Input and validation for driver number.
+            print()
             DriverNum = input("Enter the driver number: ")
             if DriverNum == "":
                 print()
@@ -101,40 +142,43 @@ while True:
 
         while True:
             # Input and validation for rentail start date.
+            print()
             try:
-                RenStartDate = input("Enter the start date of the rental: ")
-                RenStartDate = FV.FDateS(RenStartDate)
+                RenStartDate = input("Enter the start date of the rental (YYYY-MM-DD): ")
+                RenStartDate = datetime.datetime.strptime(RenStartDate, "%Y-%m-%d")
                 if  RenStartDate == "":
                     print()
-                    print("     Data Entry Error - Rental ID can not be blank.")
+                    print("     Data Entry Error - Rental date can not be blank.")
                     print()
             except ValueError:
                 print()
                 print(" Data Entry Error - The rental date is invalid.")
                 print()
-                continue
+                
             else:
                 break
 
-        CarRentedLst = [1, 2, 3, 4]
+
         while True:
             # Input and validation for the car number rented.
+            print()
             CarRented = input("Enter the car to be rented (1, 2, 3 or 4): ")
             CarRented = int(CarRented)
-            if CarRented == "":
+            if CarRented > 4:
                 print()
-                print("     Data Entry Error - Car rented can not be blank.")
+                print("  Data Entry Error - Must Be a Valid Number Between 1-4. ")
                 print()
-            elif CarRented not in CarRentedLst:
+            elif CarRented <= 0:
                 print()
-                print("     Data Entry Error - Car rented is invalid.")
+                print("  Data Entry Error - Must Be a Valid Number Between 1-4.")
                 print()
             else:
                 break
 
         while True:
             # Input and validation for the amount of days(s) the car will be rented.
-            NumDaysRen = input("Enter the number of days you wnat to rent a car (Day or Week): ").title()
+            print()
+            NumDaysRen = input("Rental Choice - (Day/Week): ").title()
             if NumDaysRen == "":
                 print()
                 print("     Data Entry Error - Number of days rented can not be blank.")
@@ -143,34 +187,71 @@ while True:
                 print()
                 print("     Data Entry Error - Number of day(s) rented must be either 'Day' (1 day) or 'Week' (7 days).")
                 print()
-            elif NumDaysRen == "Day":
-                NumDaysRen = 1
-            elif NumDaysRen == "Week":
-                NumDaysRen = 7
             else:
                 break
 
+                # Validation for num days rented via day/week 
+        if NumDaysRen == "Day":
+            NumDaysRen = 1
+        elif NumDaysRen == "Week":
+            NumDaysRen = 7
+
         # Statement and calculation for the rental cost.
-        if CarRented in CarRentedLst == True and NumDaysRen == 1:
-            RentalCost = DAILY_RENT_FEE * NumDaysRen
-        elif CarRented in CarRentedLst == True and NumDaysRen == 7:
-            RentalCost = WEEKLY_RENT_FEE * NumDaysRen
+        NumDaysRen = int(NumDaysRen)
+        if NumDaysRen == 1:
+            RentalCost = DAILY_RENT_FEE
+        elif NumDaysRen == 7:
+            RentalCost = WEEKLY_RENT_FEE
+
+        RentalCostDsp = FV.FDollar2(RentalCost)
 
         # Calculation for the rental Hst.
         RentalHst = RentalCost * HST_ESP
+        RentalHstDsp = FV.FDollar2(RentalHst)
 
         # Calculation for the rental total.
         TotRenCost = RentalCost + RentalHst
+        TotRenCostDsp = FV.FDollar2(TotRenCost)
+
+        CURR_DATEDsp = FV.FDateM(CURR_DATE)
+
+        RenStartDateDsp = FV.FDateM(RenStartDate)
 
         # Display results.
         print()
         print()
+        print(f"----------------------------------------")
+        print(f"             Rental Receipt             ")
+        print(f"----------------------------------------")
+        print(f" Rental ID:                      {RentalID:>6s} ")
+        print()
+        print(f" Diver Number:                  {DriverNum:>6s}")
+        print()
+        print(f" Car Rented:                     {CarRented:>2d}")
+        print()
+        print(f" Start Date of rental:        {RenStartDateDsp}")
+        print(f"----------------------------------------")
+        print(f" Number of days rented:          {NumDaysRen:>2d}")
+        print(f"                               ---------")
+        print(f" Rental Cost:                   {RentalCostDsp:>6s}")
+        print()
+        print(f" Hst:                            {RentalHstDsp:>6s}")
+        print(f"                               ---------")
+        print(f" Total Rental Cost:             {TotRenCostDsp:>6s}")
+        print(f"-----------------------------------------")
+        print(f" Rental requested on:          {CURR_DATEDsp}")
+        print(f"-----------------------------------------")
+        print(f"     Thank you from Habs Taxi Service    ")
+        print(f"-----------------------------------------")
+        print()
+        print()
+
 
         f = open("Rental.dat", "a") 
-    
+
         f.write(f"{str(RentalID)}, ")
         f.write(f"{str(DriverNum)}, ")
-        f.write(f"{str(RenStartDate)}, ")
+        f.write(f"{FV.FDateS(RenStartDate)}, ")
         f.write(f"{str(NumDaysRen)}, ")
         f.write(f"{str(CarRented)}, ")
         f.write(f"{str(RentalCost)}, ")
@@ -181,19 +262,19 @@ while True:
 
         f = open("Revenue.dat", "a")
 
-        f.write(f"{str(NEXT_TRANS_NUM)}, ")
+        f.write(f"{NEXT_TRANS_NUM}, ")
         f.write(f"{str(FV.FDateS(CURR_DATE))}, ")
-        f.write(f"Car Rental Cost", )
-        f.write(f"{str(DriverNum)}", )
-        f.write(f"{str(RentalCost)}", )
-        f.write(f"{str(RentalHst)}", )
+        f.write(f"Car Rental Cost, ")
+        f.write(f"{str(DriverNum)}")
+        f.write(f"{str(RentalCost)}, ")
+        f.write(f"{str(RentalHst)}, ")
         f.write(f"{str(TotRenCost)}\n")
 
         f.close()
 
         NEXT_TRANS_NUM += 1
 
-        f = open("Defaults.dat", "w")
+        f = open("Default.dat", "w")
 
         f.write(f"{NEXT_TRANS_NUM}\n") 
         f.write(f"{NEXT_DRIVER_NUM}\n") 
@@ -238,41 +319,177 @@ while True:
 # Record Employee Pay 
 #--------------------
 
+    def record_payment():
+    #Recoriding a payment.. this will write to its own file
+     while True:
+        payment_num = input("Enter Your Payment ID: ").strip()
+        if payment_num != "":
+             break
+        else:
+             print("Date Entry Error - Cannot Be Blank")
+                # these ifs are set up different but result should be same
+     while True: # Input and validation for driver number.
+        DriverNum = input("Enter the driver number: ").strip()
+        if DriverNum != "":
+             break
+        print("Data Entry Error - Rental ID can not be blank.")
+            # Reasoning
+     while True:
+        reason = input("Enter Reason For Payment ").strip()
+        if reason != "":
+            break
+        print("Reason Cannot Be Blank! ")      
+# Date used is today
+            
+     pay_date = FV.FDateS(datetime.datetime.now())        # Amount Here 
+
+     while True:
+        Pay_amt = input("Enter The Amount Going To Be Paid: ").strip()
+        try:
+            amount = float(Pay_amt)
+            if amount > 0:
+                break
+            else:
+                print("Data Error -- Amount Must be numeric ") # non positive num
+        except ValueError:
+         print("Value Error - Must Be Numeric") # this means not a number 
+            # Method Of Pay Here 
+     ValidMethod = {"CASH","DEBIT","VISA"}   # These are allowed inputs           
+     while True: 
+        method = input("Enter The Method Of PAyment (Cash/Debit/Visa)").strip().upper()
+        if method in ValidMethod:
+            break
+        print("Data ENtry Ertror - Method must be Cash, Debit or Visa")
+     methoddsp = method.title()
+     Pay_amtDsp = FV.FDollar2(amount)
+            # Writing to the payments .dat file here 
+
+     with open("Payments.dat", "a") as f:
+      f.write(f"{payment_num}, {DriverNum}, {pay_date}, {Pay_amtDsp}, {reason}. {methoddsp}\n")
+            
+ 
+        # =================
+        # Display results.
+        # =================
+     print()
+     print()
+     print(f"----------------------------------------")
+     print(f"             Employee Payment           ")
+     print(f"----------------------------------------")
+     print(f"Payment ID:                    {payment_num}")
+     print()
+     print(f"Diver Number:                  {NEXT_DRIVER_NUM}")
+     print()
+     print(f"Reason For Payment:            {reason}")
+     print()
+     print(f"Pay Date:                      {pay_date}")
+     print(f"----------------------------------------")
+     print(f"Pay Type:                      {methoddsp}")
+     print(f"                               ---------")
+     print(f"Pay Amount:                    {Pay_amtDsp}")
+     print(f"                               ---------")
+   
+     print(f"-----------------------------------------")
+     print(f"     Thank you from Habs Taxi Service    ")
+     print(f"-----------------------------------------")
+     print()
+     print()
+
 #--------------------
 # Print Profit Listing
-#--------------------
-    Emp_ID = enternewemployee() # Used to get the employee ID from the function. 
-   
-#   Calculations to be made.
-    TransactionID = 0 #As we don't know the ID number or alpha numerical code for this, I set it to 0.
-    TransAmt = 0.00 #Enter calculation here!
-    HSTAmt = TransAmt * HST_ESP
-    TotalAmt = TransAmt + HSTAmt
-    # Minus off of the Expenses, such as the repairs, expenses and office ID's to get the total amount.
+#---------------------
 
-    
-    with open("Finance.dat", "w") as f:
-          f.write(f"{Emp_ID}, {TransactionID}, {TransAmt}, {HSTAmt}, {TotalAmt}\n")
-          
+
+
+
+
+
 #--------------------
+# Print Driver Finance 
+#--------------------
+
+    def print_finance():
+                #prompts for input regarding the driver number start and end date 
+        emp_num = input("Enter Employee Number: ")
+                #These Inputs Will BE Used For Validaitons
+        start_date = input("Enter The Start Date")
+        end_date = input("Enter The End Date: ")
+                #Opens revenue.dat in read mode
+        with open("Revenue.dat", "r") as f:
+            data = f.readlines() # this will read the entire file as list
+            
+
+
+        print()
+        print("HAB Taxi Driver Finance Listing")
+        print(f"Driuer Number: {emp_num}")
+        print(f"From {start_date} to {end_date}")
+        print("--------------------------------")
+
+        #this starts the holding amount of the program to be 0, no value
+        total_amount = 0.0
+        # this variable is set up to catch any unwanted entries
+        found_any = False
+
+        #loop starts here
+        #this will loop through each revenue entry in the dat file
+        for line in data:
+            #These are testing out clean up methods
+            parts = line.strip().split(",") 
+
+            # if there is less tha n4 sections it wont be a valid entry
+            if len(parts) < 4:
+                continue
+            
+            #Setting up points for line targeting
+            file_emp_num = parts[0] 
+            file_date = parts[1]
+            desc = parts[2]
+            amount = float(parts[3])
+
+            #This is for checking lines that match the entered data
+            #Also Including the date Start and ENd
+            if file_emp_num == emp_num and start_date <= file_date <= end_date:
+                #This prints out the line from the section
+                print(f"{file_date} {desc} ${amount:>,.2f}")
+
+
+                #This increments the total amount
+                total_amount += amount
+
+                #Marking the section that will be flagged here
+                found_any = True
+
+        #this is statment was for a check on matching record, these validations have been staying at the end
+        #if no flags it will print
+        if found_any:
+            print("--------------------------------")
+            print(f"Total:      ${total_amount:,.2f}")
+        else:
+            print("Erorr Enter Valid Date Range.")
+
+
+#--------------------------
 # Menu Picking Portion Here 
-#--------------------
-    def main():
-        while True:
-            print("   HAB Taxi Services")
-            print("Company Services System")
-            print("1.   Enter a New Employee (driver). ")
-            print("2.   Enter Company Revenues. ") # this is the problem we ran into with qap 4 -- 
-            print("3.   Enter Company Expenses. ")
-            print("4.   Track Car Rentals. ")
-            print("5.   Record Employee Payment. ")
-            print("6.   Print Company Profit Listing. ")
-            print("7.   Print Driver Profit Listing. ")
-            print("8.   Quit Program. ")
-            print()
-    choice = input("        Enter Choice (1-8)")
+#--------------------------
+   # def main():
 
+        #while True:
 
+    print("        Habs Taxi Services         ")
+    print("      Company Services System      ")
+    print()
+    print("1.   Enter a New Employee (driver).") # done ! 
+    print("2.   Enter Company Revenues. ") # this is the problem we ran into with qap 4 --  # Done ! 
+    print("3.   Enter Company Expenses. ") # Done ! 
+    print("4.   Track Car Rentals. ")
+    print("5.   Record Employee Payment. ")
+    print("6.   Print Company Profit Listing. ") 
+    print("7.   Print Driver Profit Listing. ")
+    print("8.   Quit Program. ")
+    print()
+
+    choice = input("     Enter Choice (1-8): ")
 
 
 # To do : 
@@ -280,29 +497,45 @@ while True:
         enternewemployee()
     elif choice == "2":
         # Link Company revenue function here function tto printt out a table and so on ,,, must write to revenue function 
-        print(f"Choice 2")
+        revenue_output()
     elif choice == "3":
-        # Link expense here
         # Link compnay expense function .. and so on ,,, must write to expense function 
-        print(f"Choice 3")
+        expenses_output()
     elif choice == "4":
         # Track company Rentals.
         Rentals()
     elif choice == "5":
         # Record Employee Payment.
-        print(f"Choice 5")
+        record_payment()
     elif choice == "6":
         # Print Company Profit Listing.
         print(f"Profit Listing")
     elif choice == "7":
-        # Print Driver Financial Listing.
-        print(f"Diver Finacial Listing")
+        print_finance()
     elif choice == "8":
+        print("Good Bye ... ")
         quit()
 
-#--------------------
-# Print Driver Finance 
-#--------------------
+    print()
+    print()
+    print("Data Saving.", end="", flush=True)
+    time.sleep(0.6)
+    print(".", end="", flush=True)
+    time.sleep(0.6)
+    print(".", end="", flush=True)
+    time.sleep(0.5)
+    print(".", end="", flush=True)
+    time.sleep(0.5)
+    print("Saved!", flush=True)
+    time.sleep(0.6)
+    print("Data Saved !")
+    print()
+    print()
+
+
+
+
+
 
 #--------------------
 # Exit Program 
