@@ -28,12 +28,8 @@ with open('Default.dat', 'r') as f:
 
 os.system("cls" if os.name == "nt" else "clear") # Clears the screen when program is lanched.
 
-<<<<<<< HEAD
-    # Enter new Employee function. The user must add in all the required information.
-=======
     # Enter new Employee function.
 while True: 
->>>>>>> 9d9c3742a0733c6265f0a4e4f055088a252bab94
 
     def enternewemployee():
         Employee_ID = NEXT_DRIVER_NUM
@@ -67,9 +63,7 @@ while True:
 
         # Adds one number to the driver number each time a new employee is entered.
         NEXT_DRIVER_NUM += 1
-        
-        # Writes the information to the defaults.dat file.
-        with open("Defaults.dat", "w") as f:
+        with open("Default.dat", "w") as f:
             
             f.write(f"{NEXT_TRANS_NUM}\n") 
             f.write(f"{NEXT_DRIVER_NUM}\n") 
@@ -412,7 +406,7 @@ while True:
                 #prompts for input regarding the driver number start and end date 
         emp_num = input("Enter Employee Number: ")
                 #These Inputs Will BE Used For Validaitons
-        start_date = input("Enter The Start Date")
+        start_date = input("Enter The Start Date: ")
         end_date = input("Enter The End Date: ")
                 #Opens revenue.dat in read mode
         with open("Revenue.dat", "r") as f:
@@ -422,12 +416,16 @@ while True:
 
         print()
         print("HAB Taxi Driver Finance Listing")
+        print("--------------------------------")
+        print(f"Employee Name: {}")
+        print("--------------------------------")
         print(f"Driuer Number: {emp_num}")
         print(f"From {start_date} to {end_date}")
         print("--------------------------------")
 
         #this starts the holding amount of the program to be 0, no value
-        total_amount = 0.0
+        balduac = 0.0
+
         # this variable is set up to catch any unwanted entries
         found_any = False
 
@@ -438,35 +436,52 @@ while True:
             parts = line.strip().split(",") 
 
             # if there is less tha n4 sections it wont be a valid entry
-            if len(parts) < 4:
+            if len(parts) < 7:
                 continue
             
+
             #Setting up points for line targeting
             file_emp_num = parts[0] 
             file_date = parts[1]
             desc = parts[2]
-            amount = float(parts[3])
+            amount = float(parts[6])
+
+
 
             #This is for checking lines that match the entered data
             #Also Including the date Start and ENd
+
+
+
             if file_emp_num == emp_num and start_date <= file_date <= end_date:
                 #This prints out the line from the section
                 print(f"{file_date} {desc} ${amount:>,.2f}")
 
 
                 #This increments the total amount
-                total_amount += amount
+                balduac += amount
+
+
 
                 #Marking the section that will be flagged here
                 found_any = True
 
+
+
         #this is statment was for a check on matching record, these validations have been staying at the end
         #if no flags it will print
+
+        
+        print()
+        print()
         if found_any:
             print("--------------------------------")
-            print(f"Total:      ${total_amount:,.2f}")
+            print(f"Total:      ${balduac:,.2f}")
         else:
-            print("Erorr Enter Valid Date Range.")
+            print("-No Records Found for Employee-")
+        print()
+
+
 
 
 #--------------------------
