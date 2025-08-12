@@ -29,7 +29,7 @@ while True:
 
 
 
-    # Enter new Employee function.
+    # Enter new Employee function. The user must add in all the required information.
 
     def enternewemployee():
         Employee_ID = NEXT_DRIVER_NUM
@@ -39,28 +39,32 @@ while True:
         Phone = input("Enter the employee phone number[(XXX) XXX-XXXX]: ")
         formatted_phone = FV.format_phone(Phone)
         
-        # Employee information.
+        # Driver's license number entry.
         Driver_Lic_Num = input("Enter the driver's license number: ")
    
-        # Start checking this section here! 
+        # This formula format's the driver's expiry date.
         Driver_Ex_Date = FV.FDateS.format(2028, 12, 20) #Year / month / day of the expiration date.
 
-
+        # Statement to determine if the license is valid or not.
         Driver_Ex_Date = FV.date(2028, 12, 20) # Year / month / day of the expiration date.
         if datetime.today().date() > Driver_Ex_Date:
             print("The driver's license is expired.") 
             exit()
-        # End at this section for improvement!
+        
+        # Insurance information to be entered by the user and whether or not they are using their own vehicle.
             
         Ins_Comp = input("What is the name of the insurance company?: ").upper()
         Pol_Num = int(input("Enter the policy number for the driver: "))
         Own_Vehicle = input("Does the driver own his own vehicle? (Y/N): ").upper()
     
-    
+        # Append the information to the employees data file for storage.
         with open("Employees.dat", "a") as f:
             f.write(f"{Employee_ID}, {First_Name}, {Last_Name}, {Street_Add}, {formatted_phone}, {Driver_Lic_Num}, {Driver_Ex_Date}, {Ins_Comp}, {Pol_Num}, {Own_Vehicle}\n")
 
+        # Adds one number to the driver number each time a new employee is entered.
         NEXT_DRIVER_NUM += 1
+        
+        # Writes the information to the defaults.dat file.
         with open("Defaults.dat", "w") as f:
             
             f.write(f"{NEXT_TRANS_NUM}\n") 
@@ -200,6 +204,8 @@ while True:
 
         f.close()
 
+        
+        # This section may not be needed, but kept here for future consideration.
         '''
         # Rental vehicle number for the user to select.
         Rental_Vehicle_Num = [1, 2, 3, 4]
