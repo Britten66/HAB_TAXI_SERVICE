@@ -545,17 +545,17 @@ def Profitlisting():
 
 def print_finance():
                 #prompts for input regarding the driver number start and end date 
-        emp_num = input("Enter Employee Number: ")
+        emp_num = input("Enter Employee Number: ").strip()
                 #These Inputs Will BE Used For Validaitons
 
-        start_date = input("Enter The Start Date: ")
-        end_date = input("Enter The End Date: ")
+        start_date = input("Enter The Start Date: ").strip()[:10]
+        end_date = input("Enter The End Date: ").strip()[:10]
 
         emp_name = "Not Found"
                 #Opens revenue.dat in read mode
         with open("Employees.dat", "r") as emp_file:
             for line in emp_file:
-                parts = line.strip().split("|")
+                parts = line.strip().split(",")
                 if parts[0] == emp_num:
                     emp_name = parts[1] + " " + parts[2].strip()
                     break
@@ -566,7 +566,7 @@ def print_finance():
         print("--------------------------------")
         print(f"Employee Name: {emp_name}")
         print("--------------------------------")
-        print(f"Driuer Number: {emp_num}")
+        print(f"Driver Number: {emp_num}")
         print(f"From {start_date} to {end_date}")
         print("--------------------------------")
 
@@ -586,7 +586,7 @@ def print_finance():
         #this will loop through each revenue entry in the dat file
         for line in data:
             #These are testing out clean up methods
-            parts = line.strip().split(",") 
+            parts = [p.strip() for p in line.strip().split(",")]
 
             # if there is less tha n4 sections it wont be a valid entry
             if len(parts) < 7:
@@ -594,11 +594,10 @@ def print_finance():
             
 
             #Setting up points for line targeting
-            file_emp_num = parts[0] 
-            file_date = parts[1]
+            file_emp_num = parts[3] 
+            file_date = parts[1][:10]
             desc = parts[2]
             amount = float(parts[6])
-
 
 
             #This is for checking lines that match the entered data
@@ -609,23 +608,13 @@ def print_finance():
             if file_emp_num == emp_num and start_date <= file_date <= end_date:
                 #This prints out the line from the section
                 print(f"{file_date} {desc} ${amount:>,.2f}")
-
-
                 #This increments the total amount
                 balduac += amount
-
-
-
                 #Marking the section that will be flagged here
                 found_any = True
-
-
-
         #this is statment was for a check on matching record, these validations have been staying at the end
         #if no flags it will print
 
-        
-        print()
         print()
         if found_any:
             print("--------------------------------")
