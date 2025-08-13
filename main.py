@@ -49,6 +49,7 @@ def enternewemployee():
 
         # Statement to determine if the license is valid or not.
         Driver_Ex_Date = datetime.datetime.strptime(Driver_Ex_Date, "%Y-%m-%d") # Year / month / day of the expiration date.
+        
         if datetime.datetime.now() > Driver_Ex_Date:
             print("The driver's license is expired.") 
             exit()
