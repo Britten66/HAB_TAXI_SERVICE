@@ -282,35 +282,6 @@ def Rentals():
 
         f.close()
 
-        
-        # This section may not be needed, but kept here for future consideration.
-        '''
-        # Rental vehicle number for the user to select.
-        Rental_Vehicle_Num = [1, 2, 3, 4]
-        Rent_Period = ["day", "week"]
-
-        if Own_Vehicle == "Y":
-            print("Driver's vehicle used.")
-            
-        else:
-            # Ask the user for rental details.
-            Rent_Choice = int(input("Enter a vehicle rental number (1-4): "))
-            Rent_Period = input("How long does the driver need the rental? (day / week): ").upper()
-            if Rent_Choice in [1, 2, 3, 4]:
-                print(f"Rental vehicle number {Rent_Choice} selected.")
-            else:
-                print("Invalid rental vehicle number.")
-
-            if Rent_Period == "DAY":
-                print('Rental period set to daily.')
-            elif Rent_Period == "WEEK":
-                print("Rental period set to weekly.")
-            else:
-                print("Invalid rental period.")
-            '''
-
-                
-
 
 #--------------------
 # Record Employee Pay 
@@ -396,6 +367,180 @@ def record_payment():
 # Print Profit Listing
 #---------------------
 
+def Profitlisting():
+# Main report processing starts here.
+    while True:
+        # Input and validation for rentail start date.
+        print()
+        try:
+            StartDate = input("Enter the start date (YYYY-MM-DD): ")
+            StartDate = datetime.datetime.strptime(StartDate, "%Y-%m-%d")
+            if  StartDate == "":
+                print()
+                print("     Data Entry Error - Start date cannot be blank.")
+                print()
+        except ValueError:
+            print()
+            print(" Data Entry Error - Start date is invalid.")
+            print()
+        else:
+            break
+
+    while True:
+        # Input and validation for rentail start date.
+        print()
+        try:
+            EndDate = input("Enter the end date (YYYY-MM-DD): ")
+            EndDate = datetime.datetime.strptime(EndDate, "%Y-%m-%d")
+            if  EndDate == "":
+                print()
+                print("     Data Entry Error - End date cannot be blank.")
+                print()
+        except ValueError:
+            print()
+            print(" Data Entry Error - End date is invalid.")
+            print()
+        else:
+            break
+
+    StartDateDsp = FV.FDateS(StartDate)
+    EndDateDsp = FV.FDateS(EndDate)
+
+    # Generate report heading for the profit listing report.
+    print()
+    print(f"                         HAB TAXI SERVICE                        ")
+    print()
+    print(f"                          PROFIT LISTING                         ")
+    print()
+    print(f" Start Date:   {StartDateDsp} ")
+    print(f" End Date:     {EndDateDsp} ")
+    print(f"----------------------------------------------------------------------")
+    print()
+    print(f" Transaction     Transaction         Sub                       Total  ")
+    print(f"   Number           Date            Total          HST         Amount ")
+    print(f"----------------------------------------------------------------------")
+    print()
+
+    # Initialize counters and accumulators.
+    TotAmtAcc = 0
+
+    # Open the data file. Places the cursor at the start of the first record.
+    f = open("Revenue.dat", "r")
+
+    # Process each line (record) in the file in a loop.
+    for RevenueRecord in f:
+    
+        # The following line reads the first record in the file and creates a list.
+        RevenueLst = RevenueRecord.split(",")
+        
+        # Now grab the values from the list and assign to variables.
+        # You may not need all the fields.
+        TransNum = RevenueLst[0].strip()
+        TransDate = RevenueLst[1].strip()
+        TransDate = datetime.datetime.strptime(TransDate, "%Y-%m-%d")
+        SubTot = float(RevenueLst[4].strip())
+        Hst = float(RevenueLst[5].strip())
+        TotalAmount = float(RevenueLst[6].strip())
+
+        # Perform required calculations.
+        # if statement to determine the dates to be displayed.
+        if TransDate >= StartDate and TransDate <= EndDate:
+            TransDateDsp = FV.FDateS(TransDate)
+            SubTotDsp = FV.FDollar2(SubTot)
+            HstDsp = FV.FDollar2(Hst)
+            TotalAmountDsp = FV.FDollar2(TotalAmount)
+
+            # Display the detail line.
+            print(f"    {TransNum:<3s}          {TransDateDsp}        {SubTotDsp:<6s}        {HstDsp:<6s}      {TotalAmountDsp:6<s}")
+
+            # Update counters and accumulators.
+            TotAmtAcc += TotalAmount
+
+    TotAmtAccDsp = FV.FDollar2(TotAmtAcc)
+
+    # Close the file.
+    f.close()
+
+    # Print summary data - counters and accumulators.
+    print()
+    print(f"----------------------------------------------------------------------")
+    print(f"                                             Revenue Total: {TotAmtAccDsp:12s}")
+    print(f"                                                           -----------")
+    print()
+
+    # Start of Expenses listing report.
+    print()
+    print(f"                          HAB TAXI SERVICE                          ")
+    print()
+    print(f"                          EXPENSES LISTING                          ")
+    print()
+    print(f" Start Date:   {StartDateDsp} ")
+    print(f" End Date:     {EndDateDsp} ")
+    print(f"-------------------------------------------------------------------")
+    print()
+    print(f" Invoice       Invoice           Sub                       Total ")
+    print(f"  Number         Date           Total         HST          Amount")
+    print(f"-------------------------------------------------------------------")
+    print()
+
+    ItemTotAcc = 0
+
+    # Open the data file. Places the cursor at the start of the first record.
+    f = open("Expenses.dat", "r")
+
+    # Process each line (record) in the file in a loop.
+    for ExpensesRecord in f:
+    
+        # The following line reads the first record in the file and creates a list.
+        ExpensesLst = ExpensesRecord.split(",")
+        
+        # Now grab the values from the list and assign to variables.
+        # You may not need all the fields.
+        InvNum = ExpensesLst[0].strip()
+        TransDate = ExpensesLst[1].strip()
+        TransDate = datetime.datetime.strptime(TransDate, "%Y-%m-%d")
+        SubTot = float(ExpensesLst[8].strip())
+        Hst = float(ExpensesLst[9].strip())
+        ItemTotAmt = float(ExpensesLst[10].strip())
+
+        # Perform required calculations.
+        # If statement to determine the date 
+        if TransDate >= StartDate and TransDate <= EndDate:
+            TransDateDsp = FV.FDateS(TransDate)
+            SubTotDsp = FV.FDollar2(SubTot)
+            HstDsp = FV.FDollar2(Hst)
+            ItemTotAmtDsp = FV.FDollar2(TotalAmount)
+
+            # Display the detail line.
+            print(f"  {InvNum:<5s}       {TransDateDsp}       {SubTotDsp:<10s}    {HstDsp:<10s}    {ItemTotAmtDsp:<10s}")
+
+            # Update counters and accumulators.
+            ItemTotAcc += ItemTotAmt
+
+    ItemTotAccDsp = FV.FDollar2(ItemTotAcc)
+
+    # Close the file.
+    f.close()
+
+    print()
+    print(f"-------------------------------------------------------------------")
+    print(f"                                         Expanses Total: {ItemTotAccDsp:<12s}")
+    print(f"                                                        -----------")
+    print()
+    # Calculation to determine the profit or loss.
+    ProfitLoss = TotAmtAcc - ItemTotAcc
+    ProfitLossDsp = FV.FDollar2(ProfitLoss)
+    print()
+    print(f"                Revenue Total:  {TotAmtAccDsp:>12s}                 ")
+    print() 
+    print(f"                                    Less the                        ")
+    print()
+    print(f"                Expanses Total: {ItemTotAccDsp:>12s}                ")
+    print(f"                                  -----------                       ")
+    print(f"           Profit / Loss total: {ProfitLossDsp:>12s}                ")
+    print()
+    print()
+    print(f"--------------------------------------------------------------------")
 
 
 
