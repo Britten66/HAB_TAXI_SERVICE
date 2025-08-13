@@ -127,6 +127,7 @@ def Rentals():
             # Input and validation for driver number.
             print()
             DriverNum = input("Enter the driver number: ")
+            DriverNum = int(DriverNum)
             if DriverNum == "":
                 print()
                 print("     Data Entry Error - Rental ID cannot be blank.")
@@ -218,7 +219,7 @@ def Rentals():
         print(f"----------------------------------------")
         print(f" Rental ID:                      {RentalID:>6s} ")
         print()
-        print(f" Diver Number:                  {DriverNum:>6s}")
+        print(f" Diver Number:                  {DriverNum:>6d}")
         print()
         print(f" Car Rented:                     {CarRented:>2d}")
         print()
