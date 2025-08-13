@@ -258,7 +258,7 @@ def Rentals():
         f.write(f"{NEXT_TRANS_NUM}, ")
         f.write(f"{str(FV.FDateS(CURR_DATE))}, ")
         f.write(f"Car Rental Cost, ")
-        f.write(f"{str(DriverNum)}")
+        f.write(f"{str(DriverNum)}, ")
         f.write(f"{str(RentalCost)}, ")
         f.write(f"{str(RentalHst)}, ")
         f.write(f"{str(TotRenCost)}\n")
