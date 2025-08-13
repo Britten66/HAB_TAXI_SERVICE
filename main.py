@@ -151,7 +151,6 @@ def Rentals():
             else:
                 break
 
-
         while True:
             # Input and validation for the car number rented.
             print()
