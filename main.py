@@ -554,12 +554,10 @@ def print_finance():
         emp_name = "Not Found"
                 #Opens revenue.dat in read mode
         with open("Employees.dat", "r") as emp_file:
-            data = f.readlines() # this will read the entire file as list
-
             for line in emp_file:
-                parts = line.strip().split("\")")
+                parts = line.strip().split("|")
                 if parts[0] == emp_num:
-                    emp_name = parts[1] + " " + parts[2]
+                    emp_name = parts[1] + " " + parts[2].strip()
                     break
 
 
