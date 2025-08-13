@@ -543,9 +543,6 @@ def Profitlisting():
     print(f"--------------------------------------------------------------------")
 
 
-
-
-
 #--------------------
 # Print Driver Finance 
 #--------------------
@@ -672,7 +669,7 @@ while True:
         record_payment()
     elif choice == "6":
         # Print Company Profit Listing.
-        print(f"Profit Listing")
+        Profitlisting()
     elif choice == "7":
         print_finance()
     elif choice == "8":
