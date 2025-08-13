@@ -547,25 +547,39 @@ def print_finance():
                 #prompts for input regarding the driver number start and end date 
         emp_num = input("Enter Employee Number: ")
                 #These Inputs Will BE Used For Validaitons
+
         start_date = input("Enter The Start Date: ")
         end_date = input("Enter The End Date: ")
+
+        emp_name = "Not Found"
                 #Opens revenue.dat in read mode
-        with open("Revenue.dat", "r") as f:
+        with open("Employees.dat", "r") as emp_file:
             data = f.readlines() # this will read the entire file as list
-            
+
+            for line in emp_file:
+                parts = line.strip().split("\")")
+                if parts[0] == emp_num:
+                    emp_name = parts[1] + " " + parts[2]
+                    break
 
 
         print()
         print("HAB Taxi Driver Finance Listing")
         print("--------------------------------")
-        # print(f"Employee Name: {}")
+        print(f"Employee Name: {emp_name}")
         print("--------------------------------")
         print(f"Driuer Number: {emp_num}")
         print(f"From {start_date} to {end_date}")
         print("--------------------------------")
 
+
+
         #this starts the holding amount of the program to be 0, no value
         balduac = 0.0
+      
+        with open("Revenue.dat", "r") as f:
+         data = f.readlines() # this will read the entire file as list
+            
 
         # this variable is set up to catch any unwanted entries
         found_any = False
