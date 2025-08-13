@@ -27,15 +27,14 @@ with open('Default.dat', 'r') as f:
 
 os.system("cls" if os.name == "nt" else "clear") # Clears the screen when program is lanched.
 
-    # Enter new Employee function.
-
+# Enter new Employee function.
 
 def enternewemployee():
         global NEXT_DRIVER_NUM
         Employee_ID = NEXT_DRIVER_NUM
         First_Name = input("Enter the employee first name: ").upper()
         Last_Name = input("Enter the employee last name: ").upper()
-        Street_Add = input("Enter the employee street address:")
+        Street_Add = input("Enter the employee street address: ")
         Phone = input("Enter the employee phone number[(XXX) XXX-XXXX]: ")
         formatted_phone = FV.format_phone(Phone)
         
@@ -76,8 +75,6 @@ def enternewemployee():
             f.write(f"{WEEKLY_RENT_FEE }\n") 
             f.write(f"{HST_ESP}\n")
 
-
-
 #--------------------
 # Revenue Here
 #--------------------
@@ -97,7 +94,6 @@ def expenses_output():
         EXP_OUTPUT = str(f.readlines()) # will print expense file list
 
         print(f"{EXP_OUTPUT}")
-
 
 
 #--------------------
@@ -122,7 +118,7 @@ def Rentals():
             RentalID = input("Enter the rental ID: ")
             if RentalID == "":
                 print()
-                print("     Data Entry Error - Rental ID can not be blank.")
+                print("     Data Entry Error - Rental ID cannot be blank.")
                 print()
             else:
                 break
@@ -133,7 +129,7 @@ def Rentals():
             DriverNum = input("Enter the driver number: ")
             if DriverNum == "":
                 print()
-                print("     Data Entry Error - Rental ID can not be blank.")
+                print("     Data Entry Error - Rental ID cannot be blank.")
                 print()
             else:
                 break
@@ -146,7 +142,7 @@ def Rentals():
                 RenStartDate = datetime.datetime.strptime(RenStartDate, "%Y-%m-%d")
                 if  RenStartDate == "":
                     print()
-                    print("     Data Entry Error - Rental date can not be blank.")
+                    print("     Data Entry Error - Rental date cannot be blank.")
                     print()
             except ValueError:
                 print()
@@ -155,7 +151,6 @@ def Rentals():
                 
             else:
                 break
-
 
         while True:
             # Input and validation for the car number rented.
@@ -692,11 +687,6 @@ while True:
     print("Data Saved !")
     print()
     print()
-
-
-
-
-
 
 #--------------------
 # Exit Program 
