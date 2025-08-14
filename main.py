@@ -58,12 +58,22 @@ def enternewemployee():
         Ins_Comp = input("What is the name of the insurance company?: ").upper()
         Pol_Num = int(input("Enter the policy number for the driver: "))
         Own_Vehicle = input("Does the driver own his own vehicle? (Y/N): ").upper()
-    
+        
+        # If the driver has their own vehicle and enter's "Y", the monthly stand fee will be due on the first day of the month.
+        # The balance due would be updated at this point, but isn't necessary.
+        
+        if Own_Vehicle == "Y" and datetime.day == 1:
+            print(f"Stand fee due: ${MONTHLY_STAND_FEE:.2f}")
+        else:
+            print("No stand fee today.")
+        
         # Append the information to the employees data file for storage.
+        
         with open("Employees.dat", "a") as f:
             f.write(f"{Employee_ID}, {First_Name}, {Last_Name}, {Street_Add}, {formatted_phone}, {Driver_Lic_Num}, {Driver_Ex_Date}, {Ins_Comp}, {Pol_Num}, {Own_Vehicle}, {BalDue}\n")
 
         # Adds one number to the driver number each time a new employee is entered.
+        
         NEXT_DRIVER_NUM += 1
         
         with open("Default.dat", "w") as f:
@@ -633,6 +643,7 @@ def print_finance():
    # def main():
 
 while True:
+    
 
     print("        Habs Taxi Services         ")
     print("      Company Services System      ")
