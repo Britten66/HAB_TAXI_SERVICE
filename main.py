@@ -252,7 +252,7 @@ def Rentals():
         f.write(f"{str(RentalHst)}, ")
         f.write(f"{str(TotRenCost)}\n ")
 
-        f.close
+        f.close()
 
         f = open("Revenue.dat", "a")
 
