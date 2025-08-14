@@ -13,6 +13,7 @@ import FormatValues as FV
 import os 
 
 # Define program constents.
+
 CURR_DATE = datetime.datetime.now()
 
 
@@ -47,6 +48,7 @@ def enternewemployee():
         BalDue = 0
 
         # Statement to determine if the license is valid or not.
+        
         Driver_Ex_Date = datetime.datetime.strptime(Driver_Ex_Date, "%Y-%m-%d") # Year / month / day of the expiration date.
         
         if datetime.datetime.now() > Driver_Ex_Date:
