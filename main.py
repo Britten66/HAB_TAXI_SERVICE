@@ -17,7 +17,7 @@ import os
 CURR_DATE = datetime.datetime.now()
 
 
-with open('Default.dat', 'r') as f:
+with open("Default.dat", "r") as f:
     NEXT_TRANS_NUM = int(f.readline()) # 143 is the default driver number.
     NEXT_DRIVER_NUM = int(f.readline()) # 1922 is the default driver number.
     MONTHLY_STAND_FEE = float(f.readline()) # $175.00 for monthly stand fee for drivers with their own vehicle.
@@ -33,33 +33,119 @@ os.system("cls" if os.name == "nt" else "clear") # Clears the screen when progra
 def enternewemployee():
         global NEXT_DRIVER_NUM
         Employee_ID = NEXT_DRIVER_NUM
-        First_Name = input("Enter the employee first name: ").upper()
-        Last_Name = input("Enter the employee last name: ").upper()
-        Street_Add = input("Enter the employee street address: ")
-        Phone = input("Enter the employee phone number[(XXX) XXX-XXXX]: ")
+        while True:
+            print()
+            First_Name = input("Enter the employee first name: ").title()
+            if First_Name == "":
+                print()
+                print("     Data Entry Error - First name cannot be blank.")
+                print()
+            else:
+                break
+
+        while True:
+            print()
+            Last_Name = input("Enter the employee last name: ").title()
+            if Last_Name == "":
+                print()
+                print("     Data Entry Error - Last name cannot be blank.")
+                print()
+            else:
+                break
+
+        while True:
+            print()    
+            Street_Add = input("Enter the employee street address: ")
+            if Street_Add == "":
+                print()
+                print("     Data Entry Error - Street address cannot be blank.")
+                print()
+            else:
+                break
+
+        while True:
+            print()
+            Phone = input("Enter the employee phone number (9999999999): ")
+            if Phone == "":
+                print()
+                print("     Data Entry Error - Phone number cannot be blank.")
+                print()
+            elif Phone.isalpha == True:
+                print()
+                print("     Data Entry Error - Phone number cannot conatin letters.")
+                print()
+            elif len(Phone) != 10:
+                print()
+                print("     Data Entry Error - Phone number must be 10 numbers.")
+                print()
+            else:
+                break
+
         formatted_phone = FV.format_phone(Phone)
         
         # Driver's license number entry.
-        
-        Driver_Lic_Num = input("Enter the driver's license number: ")
-        Driver_Ex_Date = input("Enter the driver's expiry date (YYYY-MM-DD): ")
-        
+        while True:
+            print()
+            Driver_Lic_Num = input("Enter the driver's license number: ")
+            if Driver_Lic_Num == "":
+                print()
+                print("     Data Entry Error - Diver licence cannot be blank.")
+                print()
+            else:
+                break
+
+        while True:
+            print()   
+            try:
+                Driver_Ex_Date = input("Enter the driver's expiry date (YYYY-MM-DD): ")
+                Driver_Ex_Date = datetime.datetime.strptime(Driver_Ex_Date, "%Y-%m-%d") # Year / month / day of the expiration date.
+                if  Driver_Ex_Date == "":
+                    print()
+                    print("     Data Entry Error - Driver licence expiry date cannot be blank.")
+                    print()
+            except ValueError:
+                print()
+                print("     Data Entry Error - Driver licence expiry date is invalid.")
+                print()
+            else:
+                # Statement to determine if the license is valid or not.
+                CURR_DATEDsp = datetime.datetime.strptime(CURR_DATE, "%Y-%m-%d")
+                if CURR_DATEDsp > Driver_Ex_Date:
+                    print()
+                    print("     The driver's license is expired.")
+                    print()
+                else:
+                    break
+
         # Balance due.
         BalDue = 0
 
-        # Statement to determine if the license is valid or not.
-        
-        Driver_Ex_Date = datetime.datetime.strptime(Driver_Ex_Date, "%Y-%m-%d") # Year / month / day of the expiration date.
-        
-        if datetime.datetime.now() > Driver_Ex_Date:
-            print("The driver's license is expired.") 
-            exit()
-        
         # Insurance information to be entered by the user and whether or not they are using their own vehicle.
-            
-        Ins_Comp = input("What is the name of the insurance company?: ").upper()
-        Pol_Num = int(input("Enter the policy number for the driver: "))
-        Own_Vehicle = input("Does the driver own his own vehicle? (Y/N): ").upper()
+        while True:
+            Ins_Comp = input("What is the name of the insurance company?: ")
+            if Ins_Comp == "":
+                print()
+                print("     Data Entry Error - Insurance company cannot be blank.")
+                print()
+            else:
+                break
+        while True:
+            Pol_Num = int(input("Enter the policy number for the driver: "))
+            if Pol_Num == "":
+                 print()
+                 print("     Data Entry Error - Driver licence expiry date cannot be blank.")
+                 print()
+            else:
+                break     
+        
+        while True:
+            Own_Vehicle = input("Does the driver own his own vehicle? (Y/N): ").upper()
+            if Own_Vehicle == "":
+                print()
+                print("     Data Entry Error - Driver licence expiry date is invalid.")
+                print()
+            else:
+                break
         
         # If the driver has their own vehicle and enter's "Y", the monthly stand fee will be due on the first day of the month.
         # The balance due would be updated at this point, but isn't necessary.
@@ -161,7 +247,6 @@ def Rentals():
                 print()
                 print(" Data Entry Error - The rental date is invalid.")
                 print()
-                
             else:
                 break
 
