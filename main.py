@@ -17,7 +17,7 @@ import os
 CURR_DATE = datetime.datetime.now()
 
 
-with open("Default.dat", "r") as f:
+with open('Default.dat', 'r') as f:
     NEXT_TRANS_NUM = int(f.readline()) # 143 is the default driver number.
     NEXT_DRIVER_NUM = int(f.readline()) # 1922 is the default driver number.
     MONTHLY_STAND_FEE = float(f.readline()) # $175.00 for monthly stand fee for drivers with their own vehicle.
@@ -33,6 +33,7 @@ os.system("cls" if os.name == "nt" else "clear") # Clears the screen when progra
 def enternewemployee():
         global NEXT_DRIVER_NUM
         Employee_ID = NEXT_DRIVER_NUM
+
         while True:
             print()
             First_Name = input("Enter the employee first name: ").title()
@@ -109,8 +110,8 @@ def enternewemployee():
                 print()
             else:
                 # Statement to determine if the license is valid or not.
-                CURR_DATEDsp = datetime.datetime.strptime(CURR_DATE, "%Y-%m-%d")
-                if CURR_DATEDsp > Driver_Ex_Date:
+                # CURR_DATEDsp = datetime.datetime.strptime(CURR_DATE, "%Y-%m-%d")
+                if CURR_DATE > Driver_Ex_Date:
                     print()
                     print("     The driver's license is expired.")
                     print()
@@ -129,6 +130,7 @@ def enternewemployee():
                 print()
             else:
                 break
+
         while True:
             Pol_Num = int(input("Enter the policy number for the driver: "))
             if Pol_Num == "":
@@ -149,22 +151,22 @@ def enternewemployee():
         
         # If the driver has their own vehicle and enter's "Y", the monthly stand fee will be due on the first day of the month.
         # The balance due would be updated at this point, but isn't necessary.
-        
+        '''
         if Own_Vehicle == "Y" and datetime.day == 1:
             print(f"Stand fee due: ${MONTHLY_STAND_FEE:.2f}")
         else:
             print("No stand fee today.")
-        
+        '''
         # Append the information to the employees data file for storage.
         
-        with open("Employees.dat", "a") as f:
+        with open('Employees.dat', 'a') as f:
             f.write(f"{Employee_ID}, {First_Name}, {Last_Name}, {Street_Add}, {formatted_phone}, {Driver_Lic_Num}, {Driver_Ex_Date}, {Ins_Comp}, {Pol_Num}, {Own_Vehicle}, {BalDue}\n")
 
         # Adds one number to the driver number each time a new employee is entered.
         
         NEXT_DRIVER_NUM += 1
         
-        with open("Default.dat", "w") as f:
+        with open('Default.dat', 'w') as f:
             
             f.write(f"{NEXT_TRANS_NUM}\n") 
             f.write(f"{NEXT_DRIVER_NUM}\n") 
