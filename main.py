@@ -440,7 +440,7 @@ def record_payment():
      print(f"----------------------------------------")
      print(f"             Employee Payment           ")
      print(f"----------------------------------------")
-     print(f"Payment ID:                    {payment_num}")
+     print(f"Payment ID:                     {payment_num}")
      print()
      print(f"Driver Number:                  {NEXT_DRIVER_NUM}")
      print()
